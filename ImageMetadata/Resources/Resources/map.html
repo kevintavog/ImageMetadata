@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=e8KE3frcmrcs4PB7qEZq51Ztnh2ftGC3"></script>
+    <style>
+        html { width: 100%; height: 100%; margin: 0px; }
+        body { width: 100%; height: 100%; margin: 0px; background: black; }
+        .leaflet-popup-content-wrapper .leaflet-popup-content {
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <div id="map" style="width:100vw; height:100%;"></div>
+
+	<script>
+        var lat = 47.62201666666667;
+        var lon = -122.335685;
+
+        var mapLayer = MQ.mapLayer();
+        var darkLayer = MQ.darkLayer();
+        var satelliteLayer = MQ.hybridLayer();
+        var openStreetMapLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                             maxZoom: 19,
+                                             attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                                             })
+
+        map = L.map('map', {
+                layers: mapLayer,
+                center: [lat, lon],
+                zoom: 10
+            });
+
+        map.on('click', function(e) {
+            if (e.originalEvent.altKey) {
+               webkit.messageHandlers.showDetailedPlacename.postMessage({ lat: e.latlng.lat, lon: e.latlng.lng });
+            }
+        });
+
+        var popup = L.popup();
+
+
+        function setMapLayer() {
+            map.removeLayer(darkLayer);
+            map.removeLayer(satelliteLayer);
+            map.removeLayer(openStreetMapLayer);
+            map.addLayer(mapLayer);
+        }
+
+        function setSatelliteLayer() {
+            map.removeLayer(mapLayer);
+            map.removeLayer(darkLayer);
+            map.removeLayer(openStreetMapLayer);
+            map.addLayer(satelliteLayer);
+        }
+
+        function setDarkLayer() {
+            map.removeLayer(mapLayer);
+            map.removeLayer(satelliteLayer);
+            map.removeLayer(openStreetMapLayer);
+            map.addLayer(darkLayer);
+        }
+
+        function setOpenStreetMapLayer() {
+            map.removeLayer(mapLayer);
+            map.removeLayer(satelliteLayer);
+            map.removeLayer(darkLayer);
+            map.addLayer(openStreetMapLayer);
+        }
+
+		function setCenter(location, zoom) {
+			map.setView(location, zoom);
+		}
+
+		function fitToBounds(bounds) {
+			map.fitBounds(bounds);
+		}
+
+        var activeMarkers = [];
+		function addMarker(name, id, location, title) {
+			marker = L.marker(location, { draggable:'true', title:title } );
+            setMarkerId(marker, id);
+            activeMarkers.push(marker);
+
+            marker.on('dragend', function(event) {
+                var marker = event.target;
+                var position = marker.getLatLng();
+                var id = markerId(marker);
+                webkit.messageHandlers.updateMarker.postMessage({ id: id, lat: position.lat, lon: position.lng });
+            });
+
+            marker.on('click', function(event) {
+                webkit.messageHandlers.markerClicked.postMessage({ name: name });
+            });
+
+            marker.addTo(map);
+		}
+
+        function removeAllMarkers() {
+            for (idx = 0; idx < activeMarkers.length; ++idx) {
+                map.removeLayer(activeMarkers[idx]);
+            }
+            activeMarkers.length = 0;
+        }
+
+        var allSensitiveLocations = [];
+        function addSensitiveLocation(location, radius) {
+            circle = L.circle(location, radius, {
+                                  stroke: false,
+                                  fillColor: '#f03',
+                                  fillOpacity: 0.5
+                              });
+            circle.addTo(map);
+            allSensitiveLocations.push(circle)
+        }
+
+        function removeAllSensitiveLocations() {
+            for (idx = 0; idx < allSensitiveLocations.length; ++idx) {
+                map.removeLayer(allSensitiveLocations[idx]);
+            }
+            allSensitiveLocations.length = 0;
+        }
+
+		function setPopup(location, s) {
+			popup
+				.setLatLng(location)
+				.setContent(s)
+				.openOn(map);
+		}
+
+		function resetPopup() {
+			map.closePopup(popup);
+		}
+
+        function toggleSensitiveLocation(lat, lon) {
+            webkit.messageHandlers.toggleSensitiveLocation.postMessage({ lat: lat, lon: lon });
+        }
+
+		function pointToLatLng(p) {
+			var ll = map.containerPointToLatLng(p);
+			return JSON.stringify(ll);
+		}
+
+        function markerId(obj) {
+            return String(obj.__obj_id);
+        }
+
+        function setMarkerId(obj, id) {
+            obj.__obj_id = id;
+        }
+	</script>
+</body>
+</html>
