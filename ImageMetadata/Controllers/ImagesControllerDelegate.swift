@@ -56,9 +56,11 @@ extension MainController {
     }
     
     @IBAction func copyLatLon(_ sender: Any) {
-        visitFirstSelectedItem( { (item: MediaData) -> () in
-            NSPasteboard.general.clearContents()
-            NSPasteboard.general.setString("\(item.location.latitude),\(item.location.longitude)", forType: NSPasteboard.PasteboardType.string)
+        visitFirstSelectedItem( { (mediaItem: MediaData) -> () in
+            self.requireLocation(mediaItem, { (item: MediaData) -> () in
+                NSPasteboard.general.clearContents()
+                NSPasteboard.general.setString("\(item.location.latitude),\(item.location.longitude)", forType: NSPasteboard.PasteboardType.string)
+            })
         })
     }
     
@@ -121,14 +123,93 @@ extension MainController {
                 }
 
                 Async.main {
-                    self.reloadExistingMedia()
+                    self.reloadExistingFolder()
                 }
             } catch let error {
                 Async.main {
-                    self.reloadExistingMedia()
+                    self.reloadExistingFolder()
                     MainController.showWarning("Clearing file locations failed: \(error)")
                 }
             }
         }
     }
+
+    @IBAction func setFileDateToMetadataDate(_ sender: Any) {
+        let mediaItems = selectedMediaItems()
+        if mediaItems.count < 1 {
+            MainController.showWarning("No items selected, cannot set file dates")
+            return
+        }
+
+        Async.background {
+            for item in mediaItems {
+                let _ = item.setFileDateToExifDate()
+            }
+
+            Async.main {
+                self.reloadExistingFolder()
+            }
+        }
+    }
+
+    @IBAction func showInFinder(_ sender: Any) {
+        visitFirstSelectedItem( { (item: MediaData) -> () in
+            NSWorkspace.shared.selectFile(item.url!.path, inFileViewerRootedAtPath: "")
+        })
+    }
+
+    @IBAction func convertVideo(_ sender: Any) {
+        let mediaItems = selectedMediaItems()
+        if mediaItems.count < 1 {
+            MainController.showWarning("No items selected, cannot convert videos")
+            return
+        }
+
+        // Convert items that are videos that haven't already been converted
+        let videos = mediaItems.filter( { $0.type == .video && !$0.name.hasSuffix("_V.MP4") } )
+        if videos.count < 1 {
+            MainController.showWarning("No unconverted videos selected, nothing to do")
+            return
+        }
+
+        let folder = self.getActiveDirectory()
+        let controller = LogResultsController.create(header: "Convert video")
+        Async.background {
+            for m in videos {
+                let rotationOption = self.getRotationOption(m)
+
+                let sourceName = "\(folder)/\(m.name!)"
+                let destinationName = "\(folder)/\(m.nameWithoutExtension)_V.MP4"
+                controller.log("convert \(sourceName) -> \(destinationName)\n")
+                HandBrakeRunner.convertVideo(sourceName, destinationName, rotationOption, controller)
+            }
+
+            Async.main {
+                controller.operationCompleted()
+                self.reloadExistingFolder()
+            }
+        }
+
+        NSApplication.shared.runModal(for: controller.window!)
+    }
+
+    func getRotationOption(_ mediaData: MediaData) -> String {
+        if let rotation = mediaData.rotation {
+            switch rotation {
+            case 90:
+                return "--rotate=4"
+            case 180:
+                return "--rotate=3"
+            case 270:
+                return "--rotate=7"
+            case 0:
+                return ""
+            default:
+                Logger.warn("Unhandled rotation \(mediaData.rotation!)")
+                return ""
+            }
+        }
+        return ""
+    }
+
 }

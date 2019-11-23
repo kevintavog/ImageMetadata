@@ -14,6 +14,11 @@ extension MainController {
         selectDirectoryViewRow(Preferences.lastSelectedFolder)
     }
 
+    func getActiveDirectory() -> String {
+        let selectedItem = toTree(folderView.item(atRow: folderView.selectedRow))
+        return selectedItem.folder
+    }
+
     func outlineViewSelectionDidChange(_ notification: Notification) {
         clearAllMarkers()
         let selectedItem = toTree(folderView.item(atRow: folderView.selectedRow))

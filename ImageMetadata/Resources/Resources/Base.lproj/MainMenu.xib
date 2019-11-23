@@ -67,6 +67,19 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="bge-SJ-3TE"/>
+                <menuItem title="Set file date to metadata" id="2ff-NX-Wfi">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="setFileDateToMetadataDate:" target="rbl-N9-M9A" id="M9a-kR-wed"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Convert video" id="NMF-t6-ST3">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="convertVideo:" target="rbl-N9-M9A" id="xh9-r9-wbb"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="m5G-ir-aMJ"/>
                 <menuItem title="Copy location" id="KxR-cN-bZG">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -83,6 +96,13 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="clearLatLon:" target="rbl-N9-M9A" id="Dek-ge-zZR"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="1Hs-kD-brF"/>
+                <menuItem title="Show in Finder" id="uBm-Qy-FSz">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showInFinder:" target="rbl-N9-M9A" id="dc5-kM-MjJ"/>
                     </connections>
                 </menuItem>
             </items>
@@ -156,6 +176,13 @@
                                     <action selector="clearLatLon:" target="rbl-N9-M9A" id="vlp-48-1dq"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="a2n-n3-j3q"/>
+                            <menuItem title="Show in Finder" id="tJI-2b-Zvb">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showInFinder:" target="rbl-N9-M9A" id="Ekk-9a-qZY"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="4sG-V4-Xoc"/>
                             <menuItem title="Adjust time..." id="RGF-Ze-VhI">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -164,6 +191,19 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="GOH-9h-P6O"/>
+                            <menuItem title="Set file date to metadata" id="HG8-bo-fPr">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="setFileDateToMetadataDate:" target="rbl-N9-M9A" id="jEm-35-Vg0"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Convert video" id="0z7-2I-crJ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="convertVideo:" target="rbl-N9-M9A" id="ccK-Ia-69Y"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="L5d-ql-WVp"/>
                             <menuItem title="Import..." id="pH2-Ge-I3G">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>

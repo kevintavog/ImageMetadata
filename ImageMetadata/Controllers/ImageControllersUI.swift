@@ -52,7 +52,7 @@ extension MainController {
         setImagesStatus()
     }
 
-    func reloadExistingMedia() {
+    func reloadExistingFolder() {
         let selection = imagesView.selectionIndexPaths
         mediaProvider.refresh()
         applyFilters()
@@ -259,18 +259,25 @@ extension MainController {
             return
         }
 
-        if mediaItems.first?.location != nil {
-            visit(mediaItems.first!)
-        } else {
-            MainController.showWarning("This item has no location info:\n \(mediaItems.first!.url!.path)")
-        }
+        visit(mediaItems.first!)
     }
 
+    func requireLocation(_ mediaItem: MediaData, _ visit: @escaping ( _ mediaItem: MediaData ) -> ()) {
+        if mediaItem.location != nil {
+            visit(mediaItem)
+        } else {
+            MainController.showWarning("This item has no location info:\n \(mediaItem.url!.path)")
+        }
+
+    }
+    
     func launchLocationUrl(_ getUrl: @escaping ( _ mediaItem: MediaData ) -> (String)) {
-        visitFirstSelectedItem( { (item: MediaData) -> () in
-            let url = getUrl(item)
-            Logger.info("Launching \(url)")
-            NSWorkspace.shared.open(URL(string: url)!)
+        visitFirstSelectedItem( { (mediaItem: MediaData) -> () in
+            self.requireLocation(mediaItem, { (item: MediaData) -> () in
+                let url = getUrl(item)
+                Logger.info("Launching \(url)")
+                NSWorkspace.shared.open(URL(string: url)!)
+            })
         })
     }
 
@@ -344,14 +351,14 @@ extension MainController {
                 }
 
                 Async.main {
-                    self.reloadExistingMedia()
+                    self.reloadExistingFolder()
                 }
 
             } catch let error {
                 Logger.error("Setting file location failed: \(error)")
 
                 Async.main {
-                    self.reloadExistingMedia()
+                    self.reloadExistingFolder()
                     MainController.showWarning("Setting file location failed: \(error)")
                 }
             }

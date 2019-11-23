@@ -14,6 +14,10 @@
 		442926F623837AA400D4E705 /* map.html in Resources */ = {isa = PBXBuildFile; fileRef = 442926F523837AA300D4E705 /* map.html */; };
 		442926F823837BC700D4E705 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 442926F723837BC700D4E705 /* WebKit.framework */; };
 		442926FA2388BCEF00D4E705 /* ExifToolRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442926F92388BCEF00D4E705 /* ExifToolRunner.swift */; };
+		442926FC2388D74600D4E705 /* HandBrakeRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442926FB2388D74600D4E705 /* HandBrakeRunner.swift */; };
+		442926FF2389A8BD00D4E705 /* LogResultsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 442926FE2389A8BD00D4E705 /* LogResultsWindow.xib */; };
+		442927012389AAA400D4E705 /* LogResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442927002389AAA400D4E705 /* LogResultsController.swift */; };
+		442927032389ADFE00D4E705 /* LogResultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442927022389ADFE00D4E705 /* LogResultsProtocol.swift */; };
 		4430CF342381E7FF0046D876 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430CF332381E7FF0046D876 /* AppDelegate.swift */; };
 		4430CF362381E8000046D876 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4430CF352381E8000046D876 /* Assets.xcassets */; };
 		4430CF392381E8000046D876 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4430CF372381E8000046D876 /* MainMenu.xib */; };
@@ -64,6 +68,10 @@
 		442926F523837AA300D4E705 /* map.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = map.html; path = Resources/map.html; sourceTree = "<group>"; };
 		442926F723837BC700D4E705 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		442926F92388BCEF00D4E705 /* ExifToolRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExifToolRunner.swift; sourceTree = "<group>"; };
+		442926FB2388D74600D4E705 /* HandBrakeRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandBrakeRunner.swift; sourceTree = "<group>"; };
+		442926FE2389A8BD00D4E705 /* LogResultsWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogResultsWindow.xib; sourceTree = "<group>"; };
+		442927002389AAA400D4E705 /* LogResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogResultsController.swift; sourceTree = "<group>"; };
+		442927022389ADFE00D4E705 /* LogResultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogResultsProtocol.swift; sourceTree = "<group>"; };
 		4430CF302381E7FF0046D876 /* ImageMetadata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageMetadata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4430CF332381E7FF0046D876 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4430CF352381E8000046D876 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -153,6 +161,7 @@
 				4430CF352381E8000046D876 /* Assets.xcassets */,
 				4430CF3B2381E8000046D876 /* ImageMetadata.entitlements */,
 				443A8F752383123F00BD712B /* ImagesViewItem.xib */,
+				442926FE2389A8BD00D4E705 /* LogResultsWindow.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -166,6 +175,7 @@
 				442926EC2383475800D4E705 /* ImagesControllerDelegate.swift */,
 				442926EE2383491A00D4E705 /* ImageControllersUI.swift */,
 				443A8F742383123F00BD712B /* ImagesViewItem.swift */,
+				442927002389AAA400D4E705 /* LogResultsController.swift */,
 				4430CF432381F4770046D876 /* MainController.swift */,
 				442926F32383799600D4E705 /* MapViewController.swift */,
 				442926F1238376C200D4E705 /* MapWebView.swift */,
@@ -176,9 +186,11 @@
 		443A8F6F2383091E00BD712B /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				442926F92388BCEF00D4E705 /* ExifToolRunner.swift */,
+				442926FB2388D74600D4E705 /* HandBrakeRunner.swift */,
+				442927022389ADFE00D4E705 /* LogResultsProtocol.swift */,
 				443A8F702383093500BD712B /* Preferences.swift */,
 				443A8F78238321C500BD712B /* SensitiveLocations.swift */,
-				442926F92388BCEF00D4E705 /* ExifToolRunner.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -266,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				442926FF2389A8BD00D4E705 /* LogResultsWindow.xib in Resources */,
 				4430CF362381E8000046D876 /* Assets.xcassets in Resources */,
 				442926F623837AA400D4E705 /* map.html in Resources */,
 				443A8F772383123F00BD712B /* ImagesViewItem.xib in Resources */,
@@ -289,8 +302,11 @@
 				443A8F762383123F00BD712B /* ImagesViewItem.swift in Sources */,
 				442926F42383799600D4E705 /* MapViewController.swift in Sources */,
 				443A8F712383093500BD712B /* Preferences.swift in Sources */,
+				442927032389ADFE00D4E705 /* LogResultsProtocol.swift in Sources */,
 				4430CF462381F5540046D876 /* FolderController.swift in Sources */,
+				442926FC2388D74600D4E705 /* HandBrakeRunner.swift in Sources */,
 				442926FA2388BCEF00D4E705 /* ExifToolRunner.swift in Sources */,
+				442927012389AAA400D4E705 /* LogResultsController.swift in Sources */,
 				4430CF482381F7070046D876 /* DirectoryTree.swift in Sources */,
 				443A8F6B2383001500BD712B /* ImagesControllerDataSource.swift in Sources */,
 			);

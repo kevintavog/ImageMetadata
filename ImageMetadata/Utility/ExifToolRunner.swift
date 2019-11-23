@@ -18,6 +18,10 @@ public enum ExifToolError : Error {
 
 
 open class ExifToolRunner {
+    static public func copyMetadata(_ sourceName: String, _ destinationName: String) throws -> String {
+        return try runExifTool(["-overwrite_original", "-tagsFromFile", sourceName, destinationName])
+    }
+
     static public func clearFileLocations(_ imageFilePaths: [String], videoFilePaths: [String]) throws {
         try checkFiles(imageFilePaths)
         try checkFiles(videoFilePaths)
