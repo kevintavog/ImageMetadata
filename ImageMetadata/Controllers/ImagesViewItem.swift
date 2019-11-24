@@ -34,11 +34,11 @@ class ImagesViewItem: NSCollectionViewItem {
                 keywordsLabel?.stringValue = "🏷"
             }
 
+            locationLabel?.textColor = nil
             if let location = mediaData!.location {
                 locationLabel?.stringValue = location.toDecimalDegrees(true)
                 if SensitiveLocations.sharedInstance.isSensitive(location) {
                     locationLabel?.textColor = NSColor.orange
-                } else {
                 }
             } else {
                 locationLabel?.stringValue = "📍"
