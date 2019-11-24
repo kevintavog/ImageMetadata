@@ -7,16 +7,35 @@ import Async
 // Implement NSCollectionViewDelegate for `imageView`
 extension MainController {
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
-        setImagesStatus()
-        if followSelectionOnMap {
-            let mediaData = filteredViewItems[indexPaths.first!.item]
-            clearAllMarkers()
-            showMediaOnMap([mediaData])
-        }
+        selectionChanged(indexPaths, true)
     }
-    
+
     func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
+        selectionChanged(indexPaths, false)
+    }
+
+    func selectionChanged(_ indexPaths: Set<IndexPath>, _ didSelect: Bool) {
         setImagesStatus()
+        
+        if didSelect {
+            if followSelectionOnMap {
+                let mediaData = filteredViewItems[indexPaths.first!.item]
+                clearAllMarkers()
+                showMediaOnMap([mediaData])
+            }
+        }
+
+        do {
+            if try selectedKeywords.save() {
+                reloadMediaDataItems(selectedKeywords.mediaItems)
+            }
+        } catch let error {
+            Logger.error("Failed saving keywords: \(error)")
+            MainController.showWarning("Failed saving keywords: \(error)")
+        }
+
+        selectedKeywords = FilesAndKeywords(mediaItems: selectedMediaItems())
+        keywordsController?.setKeywords(selectedKeywords)
     }
 
     @IBAction func toggleKeywordsFilter(_ sender: Any) {

@@ -52,6 +52,22 @@ extension MainController {
         setImagesStatus()
     }
 
+    func reloadMediaDataItems(_ mediaItems: [MediaData]) {
+        let urls = mediaItems.map { $0.url }
+        var refreshList = Set<IndexPath>()
+        for index in 0..<filteredViewItems.count {
+            if let viewItem = imagesView.item(at: index) as? ImagesViewItem {
+                if urls.contains(viewItem.mediaData?.url) {
+                    refreshList.insert(IndexPath(item: index, section: 0))
+                }
+            }
+        }
+
+        if refreshList.count > 0 {
+            imagesView.reloadItems(at: refreshList)
+        }
+    }
+
     func reloadExistingFolder() {
         let selection = imagesView.selectionIndexPaths
         mediaProvider.refresh()
@@ -135,6 +151,13 @@ extension MainController {
     }
 
     func setSingleItemStatus(_ media: MediaData) {
+        var allKeywords = Set<String>()
+        if let mediaKeywords = media.keywords {
+            for k in mediaKeywords {
+                allKeywords.insert(k)
+            }
+        }
+
         var locationString = media.locationString()
         var keywordsString = media.keywordsString()
         if media.keywords == nil || media.keywords.count == 0 {
@@ -281,6 +304,10 @@ extension MainController {
         })
     }
 
+    func hasSelection() -> Bool {
+        return imagesView.selectionIndexPaths.count > 0
+    }
+
     func selectedMediaItems() -> [MediaData] {
         var mediaItems = [MediaData]()
         for index in imagesView.selectionIndexPaths {
@@ -330,64 +357,6 @@ extension MainController {
         }
 
         return (imagePathList, videoPathList)
-    }
-
-    func setFileLocation(_ filePaths: [String], location: Location) {
-        if filePaths.count < 1 {
-            Logger.warn("no files to update, no locations being updated")
-            return
-        }
-
-        let (imagePathList, videoPathList) = separateVideoList(filePaths)
-
-        Async.background {
-            do {
-                try ExifToolRunner.updateFileLocations(imagePathList, videoFilePaths: videoPathList, location: location)
-
-                for file in filePaths {
-                    if let mediaData = self.mediaProvider.itemFromFilePath(file) {
-                        mediaData.location = location
-                    }
-                }
-
-                Async.main {
-                    self.reloadExistingFolder()
-                }
-
-            } catch let error {
-                Logger.error("Setting file location failed: \(error)")
-
-                Async.main {
-                    self.reloadExistingFolder()
-                    MainController.showWarning("Setting file location failed: \(error)")
-                }
-            }
-        }
-    }
-
-    func updateLocations(_ location: Location, filePaths: [String]) {
-        var updateList = [String]()
-        var skipList = [String]()
-        for file in filePaths {
-            if let mediaItem = mediaProvider.itemFromFilePath(file) {
-                if mediaItem.location != nil && filePaths.count > 1 {
-                    skipList.append(file)
-                } else {
-                    updateList.append(file)
-                }
-            } else {
-                Logger.warn("Unable to find entry for \(file)")
-            }
-        }
-
-        // Update file locations...
-        setFileLocation(updateList, location: location)
-
-        if skipList.count > 0 {
-            Async.main {
-                MainController.showWarning("Some files were not updated due to existing locations: \(skipList.joined(separator: ", "))")
-            }
-        }
     }
 
 }

@@ -32,14 +32,18 @@ class MainController : NSWindowController, NSOutlineViewDelegate, NSOutlineViewD
     @IBOutlet weak var locationTabItem: NSTabViewItem!
     @IBOutlet weak var keywordsTabItem: NSTabViewItem!
     
-
+    @IBOutlet weak var keywordsView: NSCollectionView!
+    
     var mediaProvider = MediaProvider()
     var filteredViewItems = [MediaData]()
+    var keywordsController: KeywordsController? = nil
+    var selectedKeywords = FilesAndKeywords()
 
 
     override func awakeFromNib() {
         initializeMapView()
         initializeImagesView()
+        keywordsController = KeywordsController.initializeView(keywordsView)
 
 
         #if DEBUG

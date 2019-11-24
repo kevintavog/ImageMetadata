@@ -153,4 +153,63 @@ extension MainController {
         return mediaData.url!.hashValue
     }
 
+    func setFileLocation(_ filePaths: [String], location: Location) {
+        if filePaths.count < 1 {
+            Logger.warn("no files to update, no locations being updated")
+            return
+        }
+
+        let (imagePathList, videoPathList) = separateVideoList(filePaths)
+
+        Async.background {
+            do {
+                try ExifToolRunner.updateFileLocations(imagePathList, videoFilePaths: videoPathList, location: location)
+
+                for file in filePaths {
+                    if let mediaData = self.mediaProvider.itemFromFilePath(file) {
+                        mediaData.location = location
+                    }
+                }
+
+                Async.main {
+                    self.reloadExistingFolder()
+                }
+
+            } catch let error {
+                Logger.error("Setting file location failed: \(error)")
+
+                Async.main {
+                    self.reloadExistingFolder()
+                    MainController.showWarning("Setting file location failed: \(error)")
+                }
+            }
+        }
+    }
+
+    func updateLocations(_ location: Location, filePaths: [String]) {
+        var updateList = [String]()
+        var skipList = [String]()
+        for file in filePaths {
+            if let mediaItem = mediaProvider.itemFromFilePath(file) {
+                if mediaItem.location != nil && filePaths.count > 1 {
+                    skipList.append(file)
+                } else {
+                    updateList.append(file)
+                }
+            } else {
+                Logger.warn("Unable to find entry for \(file)")
+            }
+        }
+
+        // Update file locations...
+        setFileLocation(updateList, location: location)
+
+        if skipList.count > 0 {
+            Async.main {
+                MainController.showWarning("Some files were not updated due to existing locations: \(skipList.joined(separator: ", "))")
+            }
+        }
+    }
+
+
 }

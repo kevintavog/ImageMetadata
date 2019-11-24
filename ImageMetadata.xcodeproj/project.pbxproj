@@ -18,6 +18,11 @@
 		442926FF2389A8BD00D4E705 /* LogResultsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 442926FE2389A8BD00D4E705 /* LogResultsWindow.xib */; };
 		442927012389AAA400D4E705 /* LogResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442927002389AAA400D4E705 /* LogResultsController.swift */; };
 		442927032389ADFE00D4E705 /* LogResultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442927022389ADFE00D4E705 /* LogResultsProtocol.swift */; };
+		442927052389E76700D4E705 /* Keywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442927042389E76700D4E705 /* Keywords.swift */; };
+		442927082389EB7B00D4E705 /* KeywordsViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442927062389EB7B00D4E705 /* KeywordsViewItem.swift */; };
+		442927092389EB7B00D4E705 /* KeywordsViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 442927072389EB7B00D4E705 /* KeywordsViewItem.xib */; };
+		4429270C2389EF2400D4E705 /* KeywordsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429270B2389EF2400D4E705 /* KeywordsController.swift */; };
+		4429270F238B0EAF00D4E705 /* FilesAndKeywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429270E238B0EAF00D4E705 /* FilesAndKeywords.swift */; };
 		4430CF342381E7FF0046D876 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430CF332381E7FF0046D876 /* AppDelegate.swift */; };
 		4430CF362381E8000046D876 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4430CF352381E8000046D876 /* Assets.xcassets */; };
 		4430CF392381E8000046D876 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4430CF372381E8000046D876 /* MainMenu.xib */; };
@@ -72,6 +77,11 @@
 		442926FE2389A8BD00D4E705 /* LogResultsWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogResultsWindow.xib; sourceTree = "<group>"; };
 		442927002389AAA400D4E705 /* LogResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogResultsController.swift; sourceTree = "<group>"; };
 		442927022389ADFE00D4E705 /* LogResultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogResultsProtocol.swift; sourceTree = "<group>"; };
+		442927042389E76700D4E705 /* Keywords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keywords.swift; sourceTree = "<group>"; };
+		442927062389EB7B00D4E705 /* KeywordsViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordsViewItem.swift; sourceTree = "<group>"; };
+		442927072389EB7B00D4E705 /* KeywordsViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordsViewItem.xib; sourceTree = "<group>"; };
+		4429270B2389EF2400D4E705 /* KeywordsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordsController.swift; sourceTree = "<group>"; };
+		4429270E238B0EAF00D4E705 /* FilesAndKeywords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesAndKeywords.swift; sourceTree = "<group>"; };
 		4430CF302381E7FF0046D876 /* ImageMetadata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageMetadata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4430CF332381E7FF0046D876 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4430CF352381E8000046D876 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -161,6 +171,7 @@
 				4430CF352381E8000046D876 /* Assets.xcassets */,
 				4430CF3B2381E8000046D876 /* ImageMetadata.entitlements */,
 				443A8F752383123F00BD712B /* ImagesViewItem.xib */,
+				442927072389EB7B00D4E705 /* KeywordsViewItem.xib */,
 				442926FE2389A8BD00D4E705 /* LogResultsWindow.xib */,
 			);
 			path = Resources;
@@ -176,6 +187,8 @@
 				442926EE2383491A00D4E705 /* ImageControllersUI.swift */,
 				443A8F742383123F00BD712B /* ImagesViewItem.swift */,
 				442927002389AAA400D4E705 /* LogResultsController.swift */,
+				4429270B2389EF2400D4E705 /* KeywordsController.swift */,
+				442927062389EB7B00D4E705 /* KeywordsViewItem.swift */,
 				4430CF432381F4770046D876 /* MainController.swift */,
 				442926F32383799600D4E705 /* MapViewController.swift */,
 				442926F1238376C200D4E705 /* MapWebView.swift */,
@@ -187,7 +200,9 @@
 			isa = PBXGroup;
 			children = (
 				442926F92388BCEF00D4E705 /* ExifToolRunner.swift */,
+				4429270E238B0EAF00D4E705 /* FilesAndKeywords.swift */,
 				442926FB2388D74600D4E705 /* HandBrakeRunner.swift */,
+				442927042389E76700D4E705 /* Keywords.swift */,
 				442927022389ADFE00D4E705 /* LogResultsProtocol.swift */,
 				443A8F702383093500BD712B /* Preferences.swift */,
 				443A8F78238321C500BD712B /* SensitiveLocations.swift */,
@@ -279,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				442926FF2389A8BD00D4E705 /* LogResultsWindow.xib in Resources */,
+				442927092389EB7B00D4E705 /* KeywordsViewItem.xib in Resources */,
 				4430CF362381E8000046D876 /* Assets.xcassets in Resources */,
 				442926F623837AA400D4E705 /* map.html in Resources */,
 				443A8F772383123F00BD712B /* ImagesViewItem.xib in Resources */,
@@ -296,19 +312,23 @@
 				4430CF442381F4770046D876 /* MainController.swift in Sources */,
 				442926ED2383475800D4E705 /* ImagesControllerDelegate.swift in Sources */,
 				443A8F79238321C500BD712B /* SensitiveLocations.swift in Sources */,
+				4429270F238B0EAF00D4E705 /* FilesAndKeywords.swift in Sources */,
 				442926EF2383491A00D4E705 /* ImageControllersUI.swift in Sources */,
 				442926F2238376C200D4E705 /* MapWebView.swift in Sources */,
 				4430CF342381E7FF0046D876 /* AppDelegate.swift in Sources */,
 				443A8F762383123F00BD712B /* ImagesViewItem.swift in Sources */,
 				442926F42383799600D4E705 /* MapViewController.swift in Sources */,
 				443A8F712383093500BD712B /* Preferences.swift in Sources */,
+				4429270C2389EF2400D4E705 /* KeywordsController.swift in Sources */,
 				442927032389ADFE00D4E705 /* LogResultsProtocol.swift in Sources */,
 				4430CF462381F5540046D876 /* FolderController.swift in Sources */,
 				442926FC2388D74600D4E705 /* HandBrakeRunner.swift in Sources */,
+				442927052389E76700D4E705 /* Keywords.swift in Sources */,
 				442926FA2388BCEF00D4E705 /* ExifToolRunner.swift in Sources */,
 				442927012389AAA400D4E705 /* LogResultsController.swift in Sources */,
 				4430CF482381F7070046D876 /* DirectoryTree.swift in Sources */,
 				443A8F6B2383001500BD712B /* ImagesControllerDataSource.swift in Sources */,
+				442927082389EB7B00D4E705 /* KeywordsViewItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
