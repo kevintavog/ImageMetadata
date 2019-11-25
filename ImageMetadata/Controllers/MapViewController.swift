@@ -9,12 +9,13 @@ import RangicCore
 
 extension MainController {
     func initializeMapView() {
-        mapView.configuration.userContentController.add(self, name: "callback")
+        mapView.configuration.userContentController.add(self, name: "markerClicked")
         mapView.configuration.userContentController.add(self, name: "showDetailedPlacename")
+        mapView.configuration.userContentController.add(self, name: "updateMarker")
 
         mapView.navigationDelegate = self
         mapView.load(URLRequest(url: URL(fileURLWithPath: Bundle.main.path(forResource: "map", ofType: "html")!)))
-//        mapView.enableDragAndDrop(updateLocations)
+        mapView.enableDragAndDrop(updateLocations)
     }
 
     func clearAllMarkers() {
@@ -22,7 +23,6 @@ extension MainController {
     }
 
     @IBAction func showAllMarkers(_ sender: Any) {
-        Logger.info("Show markers on map")
         clearAllMarkers()
         var mediaItems = selectedMediaItems()
         if mediaItems.count == 0 {
@@ -69,6 +69,85 @@ extension MainController {
         let _ = mapView.invokeMapScript("setOpenStreetMapLayer()")
     }
 
+    @IBAction func copyLatLon(_ sender: Any) {
+        visitFirstSelectedItem( { (mediaItem: MediaData) -> () in
+            self.requireLocation(mediaItem, { (item: MediaData) -> () in
+                NSPasteboard.general.clearContents()
+                NSPasteboard.general.setString("\(item.location.latitude),\(item.location.longitude)", forType: NSPasteboard.PasteboardType.string)
+            })
+        })
+    }
+
+    @IBAction func pasteLatLon(_ sender: Any) {
+        let mediaItems = selectedMediaItems()
+        if mediaItems.count < 1 {
+            MainController.showWarning("No items selected, cannot paste location")
+            return
+        }
+
+        // Ensure lat,lon on clipboard
+        var clipboardText: String? = nil
+        for item in NSPasteboard.general.pasteboardItems! {
+            if let str = item.string(forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text")) {
+                clipboardText = str
+                break
+            }
+        }
+
+        if clipboardText == nil {
+            MainController.showWarning("Can't find any text on the clipboard")
+            return
+        }
+
+        // Expect two doubles, separated by a comma
+        let locationTokens = clipboardText!.split(separator: ",")
+        if locationTokens.count != 2 {
+            MainController.showWarning("Can't find '<lat>,<lon>' in\n '\(clipboardText!)'\nPerhaps the comma is missing.")
+            return
+        }
+
+        guard let lat = Double(locationTokens[0].trimmingCharacters(in: .whitespaces)), let lon = Double(locationTokens[1].trimmingCharacters(in: .whitespaces)) else {
+            MainController.showWarning("Can't parse out '<lat>,<lon>' from\n '\(clipboardText!)'")
+            return
+        }
+
+
+        // visit all selected items, apply lat/lon - but don't overwrite
+        var filePaths = [String]()
+        for item in mediaItems {
+            filePaths.append(item.url!.path)
+        }
+        updateLocations(Location(latitude: lat, longitude: lon), filePaths: filePaths)
+    }
+
+    @IBAction func clearLatLon(_ sender: Any) {
+        let mediaItems = selectedMediaItems()
+        if mediaItems.count < 1 {
+            MainController.showWarning("No items selected, cannot clear location")
+            return
+        }
+        let (imagePathList, videoPathList) = separateVideoList(mediaItems)
+
+        Async.background {
+            do {
+                try ExifToolRunner.clearFileLocations(imagePathList, videoFilePaths: videoPathList)
+
+                for mediaData in mediaItems {
+                    mediaData.location = nil
+                }
+
+                Async.main {
+                    self.reloadExistingFolder()
+                }
+            } catch let error {
+                Async.main {
+                    self.reloadExistingFolder()
+                    MainController.showWarning("Clearing file locations failed: \(error)")
+                }
+            }
+        }
+    }
+
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         mapView.mapInitialized = true
@@ -85,12 +164,23 @@ extension MainController {
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch message.name {
+        case "markerClicked":
+            let params = message.body as? NSDictionary
+            mapMarkerClicked(params!["path"] as? String ?? "")
+            break
         case "showDetailedPlacename":
-            Logger.error("show detailed placename: \(message.body)")
             let dict = message.body as? NSDictionary
             let lat = dict!["lat"] as? Double ?? 0
             let lon = dict!["lon"] as? Double ?? 0
             mapShowDetailedPlacename(lat, lon)
+            break
+        case "updateMarker":
+            let dict = message.body as? NSDictionary
+            // id, lat, lon
+            let id = dict!["id"] as? String ?? ""
+            let lat = dict!["lat"] as? Double ?? 0
+            let lon = dict!["lon"] as? Double ?? 0
+            mapUpdateMarker(id, lat, lon)
             break
         default:
             Logger.error("unhandled web message: \(message.name); \(message.body)")
@@ -98,6 +188,18 @@ extension MainController {
         }
     }
 
+    func mapMarkerClicked(_ path: String) {
+        for (index,m) in filteredViewItems.enumerated() {
+            if m.url!.path == path {
+                imagesView.deselectAll(nil)
+                var items = Set<IndexPath>()
+                items.insert(IndexPath(item: index, section: 0))
+                imagesView.selectItems(at: items, scrollPosition: .centeredVertically)
+                break
+            }
+        }
+    }
+    
     func mapShowDetailedPlacename(_ lat: Double, _ lon: Double) {
         let location = Location(latitude: lat, longitude: lon)
         let locationJsonStr = location.toDms().replacingOccurrences(of: "\"", with: "\\\"")
@@ -111,6 +213,16 @@ extension MainController {
         }
     }
 
+    func mapUpdateMarker(_ id: String, _ lat: Double, _ lon: Double) {
+        for m in filteredViewItems {
+            if String(getId(m)) == id {
+                Logger.info("Update \(m.url!.path) to \(lat),\(lon)")
+                updateLocations(Location(latitude: lat, longitude: lon), filePaths: [m.url!.path])
+                break
+            }
+        }
+    }
+    
     func showMediaOnMap(_ mediaItems: [MediaData]) {
         var minLat = 90.0
         var maxLat = -90.0

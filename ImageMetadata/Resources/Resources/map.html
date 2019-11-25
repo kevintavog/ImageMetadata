@@ -81,7 +81,7 @@
 		}
 
         var activeMarkers = [];
-		function addMarker(name, id, location, title) {
+		function addMarker(path, id, location, title) {
 			marker = L.marker(location, { draggable:'true', title:title } );
             setMarkerId(marker, id);
             activeMarkers.push(marker);
@@ -94,7 +94,7 @@
             });
 
             marker.on('click', function(event) {
-                webkit.messageHandlers.markerClicked.postMessage({ name: name });
+                webkit.messageHandlers.markerClicked.postMessage({ path: path });
             });
 
             marker.addTo(map);

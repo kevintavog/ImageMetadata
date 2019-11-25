@@ -574,7 +574,7 @@
                                                                     <tableColumns>
                                                                         <tableColumn editable="NO" width="521" minWidth="40" maxWidth="1000" id="tgP-Di-1tu">
                                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                                <font key="font" metaFont="system" size="11"/>
+                                                                                <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                             </tableHeaderCell>
@@ -677,7 +677,7 @@
                                                             <rect key="frame" x="-3" y="-3" width="385" height="518"/>
                                                             <wkWebViewConfiguration key="configuration">
                                                                 <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                                                <wkPreferences key="preferences"/>
+                                                                <wkPreferences key="preferences" javaScriptCanOpenWindowsAutomatically="NO"/>
                                                             </wkWebViewConfiguration>
                                                         </wkWebView>
                                                     </subviews>
@@ -699,7 +699,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <clipView key="contentView" ambiguous="YES" copiesOnScroll="NO" id="g9F-uL-Q2e">
                                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="498"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <collectionView ambiguous="YES" id="Gcr-G1-Xod">
                                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="158"/>

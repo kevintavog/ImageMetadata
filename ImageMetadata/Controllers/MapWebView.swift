@@ -15,8 +15,6 @@ class MapWebView: WKWebView {
             return nil
         }
 
-//        Logger.info("Script: \(script)")
-        
         var finished = false
         var responseObject: AnyObject? = nil
         evaluateJavaScript(script) { (result, error ) in
@@ -34,6 +32,7 @@ class MapWebView: WKWebView {
     }
 
     open func enableDragAndDrop(_ callback: @escaping (_ location: Location, _ filePaths: [String]) -> ()) {
+        registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
         dropCallback = callback
     }
 
@@ -54,37 +53,34 @@ class MapWebView: WKWebView {
         return NSDragOperation.copy
     }
 
-//    open override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-//        if dropCallback == nil {
-//            return false
-//        }
-//
-//        var mapPoint = convert(NSPoint(x: sender.draggingLocation().x, y: sender.draggingLocation().y), from: nil)
-//        mapPoint.y = self.frame.height - mapPoint.y
-//        if let ret = invokeMapScript("pointToLatLng([\(mapPoint.x), \(mapPoint.y)])") {
-//            let resultString = ret as! String
-//            if let json = try? JSON(data:Data(resultString.data(using: String.Encoding.utf8)!)) {
-//                let latitude = json["lat"].doubleValue
-//                let longitude = json["lng"].doubleValue
-//                let location = Location(latitude: latitude, longitude: longitude)
-//
-//                dropCallback!(location, filePaths(sender))
-//
-//                return true
-//            }
-//        }
-//        return false
-//    }
+    open override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
+        if dropCallback == nil {
+            return false
+        }
+
+        let mapPoint = convert(NSPoint(x: sender.draggingLocation.x, y: sender.draggingLocation.y), from: nil)
+        if let ret = invokeMapScript("pointToLatLng([\(mapPoint.x), \(mapPoint.y)])") {
+            let resultString = ret as! String
+            if let json = try? JSON(data:Data(resultString.data(using: String.Encoding.utf8)!)) {
+                let latitude = json["lat"].doubleValue
+                let longitude = json["lng"].doubleValue
+                let location = Location(latitude: latitude, longitude: longitude)
+
+                dropCallback!(location, filePaths(sender))
+
+                return true
+            }
+        }
+        return false
+    }
 
     func filePaths(_ dragInfo: NSDraggingInfo) -> [String] {
         var list = [String]()
-        if ((dragInfo.draggingPasteboard.types?.contains(NSPasteboard.PasteboardType.fileURL)) != nil) {
-            if let dropData = dragInfo.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType.fileURL) as! NSArray? {
-                for data in dropData {
-                    let path = data as! String
-                    if FileManager.default.fileExists(atPath: path) {
-                        list.append(path)
-                    }
+        if let urls = dragInfo.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: [:])  as? [URL] {
+            for u in urls {
+                let path = u.path
+                if FileManager.default.fileExists(atPath: path) {
+                    list.append(path)
                 }
             }
         }
