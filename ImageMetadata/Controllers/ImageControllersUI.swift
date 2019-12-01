@@ -53,6 +53,7 @@ extension MainController {
     }
 
     func reloadMediaDataItems(_ mediaItems: [MediaData]) {
+        let selection = imagesView.selectionIndexPaths
         let urls = mediaItems.map { $0.url }
         var refreshList = Set<IndexPath>()
         for index in 0..<filteredViewItems.count {
@@ -66,6 +67,7 @@ extension MainController {
         if refreshList.count > 0 {
             imagesView.reloadItems(at: refreshList)
         }
+        imagesView.selectionIndexPaths = selection
     }
 
     func reloadExistingFolder() {
@@ -278,7 +280,7 @@ extension MainController {
     func visitFirstSelectedItem(_ visit: @escaping ( _ mediaItem: MediaData ) -> ()) {
         let mediaItems = selectedMediaItems()
         if mediaItems.count != 1 {
-            MainController.showWarning("Only 1 file can be opened, there are \(mediaItems.count) selected")
+            MainController.showWarning("Only 1 file can be selected, there are \(mediaItems.count) selected")
             return
         }
 

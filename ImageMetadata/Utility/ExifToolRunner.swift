@@ -127,7 +127,11 @@ open class ExifToolRunner {
         if imageFilePaths.count > 0 {
             let _ = try runExifTool(
                 ["-overwrite_original",
-                    "-AllDates='\(localDateString)'"]
+                    "-AllDates='\(localDateString)'",
+                    "-IPTC:TimeCreated='\(localDateString)'",
+                    "-IFD0:ModifyDate='\(localDateString)'",
+                    "-IFD1:ModifyDate='\(localDateString)'",
+                    "-MakerNotes:SonyDateTime='\(localDateString)'"]
                     + imageFilePaths)
         }
 
@@ -139,13 +143,53 @@ open class ExifToolRunner {
 
             let _ = try runExifTool(
                 ["-overwrite_original",
-                     "-AllDates='\(utcDateString)'",
-                     "-quicktime:TrackCreateDate='\(utcDateString)'",
-                     "-quicktime:TrackModifyDate='\(utcDateString)'",
-                     "-quicktime:MediaCreateDate='\(utcDateString)'",
-                     "-quicktime:MediaModifyDate='\(utcDateString)'",
-                     "-quicktime:ContentCreateDate='\(utcDateString)'"]
-                     + videoFilePaths)
+                    "-AllDates='\(utcDateString)'",
+                    "-quicktime:TrackCreateDate='\(utcDateString)'",
+                    "-quicktime:TrackModifyDate='\(utcDateString)'",
+                    "-quicktime:MediaCreateDate='\(utcDateString)'",
+                    "-quicktime:MediaModifyDate='\(utcDateString)'",
+                    "-quicktime:ContentCreateDate='\(utcDateString)'",
+                    "-ExifIFD:CreateDate='\(localDateString)'",
+                    "-ExifIFD:DateTimeOriginal='\(localDateString)'",
+                    "-IFD0:ModifyDate='\(localDateString)'",
+                    "-IFD1:ModifyDate='\(localDateString)"]
+                    + videoFilePaths)
+        }
+    }
+
+    static public func adjustMetadataDates(_ imageFilePaths: [String], videoFilePaths: [String], hours: Int, minutes: Int, seconds: Int) throws {
+        var adjustment = "+=\(hours):\(minutes):\(seconds)"
+        if (hours < 0 || minutes < 0 || seconds < 0) {
+            adjustment = "-=\(abs(hours)):\(abs(minutes)):\(abs(seconds))"
+        }
+
+        if imageFilePaths.count > 0 {
+            let _ = try runExifTool(
+                ["-overwrite_original",
+                    "-AllDates\(adjustment)",
+                    "-IPTC:TimeCreated\(adjustment)",
+                    "-IFD0:ModifyDate\(adjustment)",
+                    "-IFD1:ModifyDate\(adjustment)",
+                    "-MakerNotes:SonyDateTime\(adjustment)"]
+                    + imageFilePaths)
+        }
+
+        // Some dates in Canon videos aren't updatable via exiftool (due to Canon silliness). Bummer
+        // http://u88.n24.queensu.ca/exiftool/forum/index.php?topic=6563.0
+        if videoFilePaths.count > 0 {
+            let _ = try runExifTool(
+                ["-overwrite_original",
+                    "-AllDates\(adjustment)",
+                    "-quicktime:TrackCreateDate\(adjustment)",
+                    "-quicktime:TrackModifyDate\(adjustment)",
+                    "-quicktime:MediaCreateDate\(adjustment)",
+                    "-quicktime:MediaModifyDate\(adjustment)",
+                    "-quicktime:ContentCreateDate\(adjustment)",
+                    "-ExifIFD:CreateDate\(adjustment)",
+                    "-ExifIFD:DateTimeOriginal\(adjustment)",
+                    "-IFD0:ModifyDate\(adjustment)",
+                    "-IFD1:ModifyDate\(adjustment)"]
+                    + videoFilePaths)
         }
     }
 

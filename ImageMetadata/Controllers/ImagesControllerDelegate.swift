@@ -136,6 +136,70 @@ extension MainController {
         NSApplication.shared.runModal(for: controller.window!)
     }
 
+    @IBAction func adjustTime(_ sender: Any) {
+        let mediaItems = selectedMediaItems()
+        if mediaItems.count < 1 {
+            MainController.showWarning("No items selected")
+            return
+        }
+
+        let controller = AdjustDateController.create(media: mediaItems)
+        let result = NSApplication.shared.runModal(for: controller.window!)
+        if result == NSApplication.ModalResponse.OK {
+            let (hours, minutes, seconds) = controller.offsets()
+            Async.background {
+                do {
+                    let (imagePathList, videoPathList) = self.separateVideoList(mediaItems)
+                    try ExifToolRunner.adjustMetadataDates(imagePathList, videoFilePaths: videoPathList, hours: hours, minutes: minutes, seconds: seconds)
+
+                    for m in mediaItems {
+                        m.reload()
+                    }
+
+                    let _ = self.mediaProvider.setFileDatesToExifDates(mediaItems)
+                    Async.main {
+                        self.reloadMediaDataItems(mediaItems)
+                    }
+                } catch let error {
+                    Logger.error("Setting dates failed: \(error)")
+
+                    Async.main {
+                        MainController.showWarning("Setting dates failed: \(error)")
+                    }
+                }
+            }
+        }
+    }
+
+    @IBAction func setTime(_ sender: Any) {
+        visitFirstSelectedItem( { (mediaItem: MediaData) -> () in
+            let controller = SetDateController.create(file: mediaItem.fileTimestamp!, metadata: mediaItem.timestamp!)
+            let result = NSApplication.shared.runModal(for: controller.window!)
+            if result == NSApplication.ModalResponse.OK {
+                if let newDate = controller.newDate() as NSDate? {
+                    Async.background {
+                        do {
+                            let (imagePathList, videoPathList) = self.separateVideoList([mediaItem.url!.path])
+                            try ExifToolRunner.setMetadataDates(imagePathList, videoFilePaths: videoPathList, newDate: newDate)
+                            mediaItem.reload()
+                            let _ = self.mediaProvider.setFileDatesToExifDates([mediaItem])
+
+                            Async.main {
+                                self.reloadMediaDataItems([mediaItem])
+                            }
+                        } catch let error {
+                            Logger.error("Setting dates failed: \(error)")
+
+                            Async.main {
+                                MainController.showWarning("Setting dates failed: \(error)")
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
     func getRotationOption(_ mediaData: MediaData) -> String {
         if let rotation = mediaData.rotation {
             switch rotation {

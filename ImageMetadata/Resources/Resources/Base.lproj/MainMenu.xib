@@ -42,45 +42,6 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu id="xKs-ta-fFV">
             <items>
-                <menuItem title="Show in Apple Maps" id="hKe-aP-zeg">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="showInAppleMaps:" target="rbl-N9-M9A" id="q4A-0w-eLJ"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="Show in Google Maps" id="KsU-F0-7gB">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="showInGoogleMaps:" target="rbl-N9-M9A" id="Nvu-H8-dI9"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="Show in OpenStreet Maps" id="byz-AO-6vl">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="showInOpenStreetMaps:" target="rbl-N9-M9A" id="QAb-4d-xFE"/>
-                    </connections>
-                </menuItem>
-                <menuItem isSeparatorItem="YES" id="426-0e-6QR"/>
-                <menuItem title="Show in Google Street View" id="Yx1-tM-mKP">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="showInGoogleStreetView:" target="rbl-N9-M9A" id="jrf-uS-nnI"/>
-                    </connections>
-                </menuItem>
-                <menuItem isSeparatorItem="YES" id="bge-SJ-3TE"/>
-                <menuItem title="Set file date to metadata" id="2ff-NX-Wfi">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="setFileDateToMetadataDate:" target="rbl-N9-M9A" id="M9a-kR-wed"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="Convert video" id="NMF-t6-ST3">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="convertVideo:" target="rbl-N9-M9A" id="xh9-r9-wbb"/>
-                    </connections>
-                </menuItem>
-                <menuItem isSeparatorItem="YES" id="m5G-ir-aMJ"/>
                 <menuItem title="Copy location" id="KxR-cN-bZG">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -99,11 +60,62 @@
                         <action selector="clearLatLon:" target="rbl-N9-M9A" id="Dek-ge-zZR"/>
                     </connections>
                 </menuItem>
-                <menuItem isSeparatorItem="YES" id="1Hs-kD-brF"/>
+                <menuItem isSeparatorItem="YES" id="m5G-ir-aMJ"/>
                 <menuItem title="Show in Finder" id="uBm-Qy-FSz">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="showInFinder:" target="rbl-N9-M9A" id="dc5-kM-MjJ"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="1Hs-kD-brF"/>
+                <menuItem title="Set file date to metadata" id="2ff-NX-Wfi">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="setFileDateToMetadataDate:" target="rbl-N9-M9A" id="M9a-kR-wed"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Adjust time..." id="aG4-qu-KAi">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="adjustTime:" target="rbl-N9-M9A" id="630-Dd-pcJ"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Set time..." id="Wwx-AC-MI6">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="setTime:" target="rbl-N9-M9A" id="paW-jd-43T"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="dk7-ps-xVH"/>
+                <menuItem title="Convert video" id="NMF-t6-ST3">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="convertVideo:" target="rbl-N9-M9A" id="xh9-r9-wbb"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="bge-SJ-3TE"/>
+                <menuItem title="Show in Apple Maps" id="hKe-aP-zeg">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showInAppleMaps:" target="rbl-N9-M9A" id="q4A-0w-eLJ"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Show in OpenStreet Maps" id="byz-AO-6vl">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showInOpenStreetMaps:" target="rbl-N9-M9A" id="QAb-4d-xFE"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Show in Google Maps" id="KsU-F0-7gB">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showInGoogleMaps:" target="rbl-N9-M9A" id="Nvu-H8-dI9"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Show in Google Street View" id="Yx1-tM-mKP">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showInGoogleStreetView:" target="rbl-N9-M9A" id="jrf-uS-nnI"/>
                     </connections>
                 </menuItem>
             </items>
@@ -185,19 +197,25 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="4sG-V4-Xoc"/>
-                            <menuItem title="Adjust time..." id="RGF-Ze-VhI">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem title="Set time..." id="QCk-Oe-VKs">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="GOH-9h-P6O"/>
                             <menuItem title="Set file date to metadata" id="HG8-bo-fPr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="setFileDateToMetadataDate:" target="rbl-N9-M9A" id="jEm-35-Vg0"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Adjust time..." id="RGF-Ze-VhI">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="adjustTime:" target="rbl-N9-M9A" id="mS6-Cv-POS"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Set time..." id="QCk-Oe-VKs">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="setTime:" target="rbl-N9-M9A" id="j2G-g7-lFY"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="GOH-9h-P6O"/>
                             <menuItem title="Convert video" id="0z7-2I-crJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -207,6 +225,9 @@
                             <menuItem isSeparatorItem="YES" id="L5d-ql-WVp"/>
                             <menuItem title="Import..." id="pH2-Ge-I3G">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="import:" target="rbl-N9-M9A" id="uSV-nW-gNn"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="View.." keyEquivalent="v" id="FUq-cI-nsm">
                                 <connections>
@@ -487,6 +508,31 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="lgD-1K-9Nu"/>
+                            <menuItem title="Show in Apple Maps" id="Sk6-eb-AYp">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showInAppleMaps:" target="rbl-N9-M9A" id="z4i-dv-jJO"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show in OpenStreet Maps" id="hFU-Xg-5rW">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showInOpenStreetMaps:" target="rbl-N9-M9A" id="DS5-vd-UL9"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show in Google Maps" id="mWr-De-Oaa">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showInGoogleMaps:" target="rbl-N9-M9A" id="hfZ-Fb-B4d"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show in Google Street View" id="56Z-10-66L">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showInGoogleStreetView:" target="rbl-N9-M9A" id="2Gq-B6-lCJ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="9QP-f8-fvs"/>
                             <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>

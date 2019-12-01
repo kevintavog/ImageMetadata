@@ -23,6 +23,10 @@
 		442927092389EB7B00D4E705 /* KeywordsViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 442927072389EB7B00D4E705 /* KeywordsViewItem.xib */; };
 		4429270C2389EF2400D4E705 /* KeywordsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429270B2389EF2400D4E705 /* KeywordsController.swift */; };
 		4429270F238B0EAF00D4E705 /* FilesAndKeywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429270E238B0EAF00D4E705 /* FilesAndKeywords.swift */; };
+		4429271123930A2600D4E705 /* SetDate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4429271023930A2600D4E705 /* SetDate.xib */; };
+		4429271323930CE400D4E705 /* SetDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429271223930CE400D4E705 /* SetDateController.swift */; };
+		4429271723932B4800D4E705 /* AdjustDate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4429271623932B4800D4E705 /* AdjustDate.xib */; };
+		442927192393319800D4E705 /* AdjustDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442927182393319800D4E705 /* AdjustDateController.swift */; };
 		4430CF342381E7FF0046D876 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430CF332381E7FF0046D876 /* AppDelegate.swift */; };
 		4430CF362381E8000046D876 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4430CF352381E8000046D876 /* Assets.xcassets */; };
 		4430CF392381E8000046D876 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4430CF372381E8000046D876 /* MainMenu.xib */; };
@@ -82,6 +86,10 @@
 		442927072389EB7B00D4E705 /* KeywordsViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordsViewItem.xib; sourceTree = "<group>"; };
 		4429270B2389EF2400D4E705 /* KeywordsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordsController.swift; sourceTree = "<group>"; };
 		4429270E238B0EAF00D4E705 /* FilesAndKeywords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesAndKeywords.swift; sourceTree = "<group>"; };
+		4429271023930A2600D4E705 /* SetDate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetDate.xib; sourceTree = "<group>"; };
+		4429271223930CE400D4E705 /* SetDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDateController.swift; sourceTree = "<group>"; };
+		4429271623932B4800D4E705 /* AdjustDate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdjustDate.xib; sourceTree = "<group>"; };
+		442927182393319800D4E705 /* AdjustDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustDateController.swift; sourceTree = "<group>"; };
 		4430CF302381E7FF0046D876 /* ImageMetadata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageMetadata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4430CF332381E7FF0046D876 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4430CF352381E8000046D876 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -169,10 +177,12 @@
 				4430CF3A2381E8000046D876 /* Info.plist */,
 				4430CF372381E8000046D876 /* MainMenu.xib */,
 				4430CF352381E8000046D876 /* Assets.xcassets */,
+				4429271623932B4800D4E705 /* AdjustDate.xib */,
 				4430CF3B2381E8000046D876 /* ImageMetadata.entitlements */,
 				443A8F752383123F00BD712B /* ImagesViewItem.xib */,
 				442927072389EB7B00D4E705 /* KeywordsViewItem.xib */,
 				442926FE2389A8BD00D4E705 /* LogResultsWindow.xib */,
+				4429271023930A2600D4E705 /* SetDate.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -180,6 +190,7 @@
 		443A8F6E238308F900BD712B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				442927182393319800D4E705 /* AdjustDateController.swift */,
 				4430CF472381F7070046D876 /* DirectoryTree.swift */,
 				4430CF452381F5540046D876 /* FolderController.swift */,
 				443A8F6A2383001500BD712B /* ImagesControllerDataSource.swift */,
@@ -192,6 +203,7 @@
 				4430CF432381F4770046D876 /* MainController.swift */,
 				442926F32383799600D4E705 /* MapViewController.swift */,
 				442926F1238376C200D4E705 /* MapWebView.swift */,
+				4429271223930CE400D4E705 /* SetDateController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -293,12 +305,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4429271723932B4800D4E705 /* AdjustDate.xib in Resources */,
 				442926FF2389A8BD00D4E705 /* LogResultsWindow.xib in Resources */,
 				442927092389EB7B00D4E705 /* KeywordsViewItem.xib in Resources */,
 				4430CF362381E8000046D876 /* Assets.xcassets in Resources */,
 				442926F623837AA400D4E705 /* map.html in Resources */,
 				443A8F772383123F00BD712B /* ImagesViewItem.xib in Resources */,
 				4430CF392381E8000046D876 /* MainMenu.xib in Resources */,
+				4429271123930A2600D4E705 /* SetDate.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,10 +329,12 @@
 				4429270F238B0EAF00D4E705 /* FilesAndKeywords.swift in Sources */,
 				442926EF2383491A00D4E705 /* ImageControllersUI.swift in Sources */,
 				442926F2238376C200D4E705 /* MapWebView.swift in Sources */,
+				442927192393319800D4E705 /* AdjustDateController.swift in Sources */,
 				4430CF342381E7FF0046D876 /* AppDelegate.swift in Sources */,
 				443A8F762383123F00BD712B /* ImagesViewItem.swift in Sources */,
 				442926F42383799600D4E705 /* MapViewController.swift in Sources */,
 				443A8F712383093500BD712B /* Preferences.swift in Sources */,
+				4429271323930CE400D4E705 /* SetDateController.swift in Sources */,
 				4429270C2389EF2400D4E705 /* KeywordsController.swift in Sources */,
 				442927032389ADFE00D4E705 /* LogResultsProtocol.swift in Sources */,
 				4430CF462381F5540046D876 /* FolderController.swift in Sources */,
