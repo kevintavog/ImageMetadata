@@ -632,6 +632,9 @@
                                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         </tableColumn>
                                                                     </tableColumns>
+                                                                    <connections>
+                                                                        <outlet property="menu" destination="erl-Mv-bmy" id="sn1-0R-3a3"/>
+                                                                    </connections>
                                                                 </outlineView>
                                                             </subviews>
                                                         </clipView>
@@ -861,6 +864,17 @@
         <menuItem title="Dark map" id="xOl-ST-1Jp">
             <modifierMask key="keyEquivalentModifierMask"/>
         </menuItem>
+        <menu id="erl-Mv-bmy">
+            <items>
+                <menuItem title="Create folder" id="in1-a3-cam">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="createFolder:" target="rbl-N9-M9A" id="5B7-ZP-iVd"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="-490.5" y="-415"/>
+        </menu>
     </objects>
     <resources>
         <image name="keyword" width="512" height="512"/>

@@ -17,6 +17,10 @@ class DirectoryTree {
         }
     }
 
+    func reload() {
+        populateChildren()
+    }
+
     var subFolders: [DirectoryTree] {
         if _subFolders == nil {
             populateChildren()

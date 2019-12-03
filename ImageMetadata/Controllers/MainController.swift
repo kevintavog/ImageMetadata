@@ -61,6 +61,10 @@ class MainController : NSWindowController, NSOutlineViewDelegate, NSOutlineViewD
         tabView.selectTabViewItem(locationTabItem)
     }
 
+    @IBAction func `import`(_ sender: Any) {
+        MainController.showWarning("'import' not implemented")
+    }
+
     static func showWarning(_ message: String) {
         Logger.error(message)
         let alert = NSAlert()

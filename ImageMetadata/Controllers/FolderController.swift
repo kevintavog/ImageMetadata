@@ -14,6 +14,33 @@ extension MainController {
         selectDirectoryViewRow(Preferences.lastSelectedFolder)
     }
 
+    @IBAction func createFolder(_ sender: Any) {
+        let tree = toTree(folderView.item(atRow: folderView.selectedRow))
+        let parent = tree.folder
+        let alert = NSAlert()
+        alert.messageText = "Enter a folder name to create as a child of\n\(parent)"
+        alert.addButton(withTitle: "Create")
+        alert.addButton(withTitle: "Cancel")
+
+        let txt = NSTextField(frame: NSRect(x: 0, y: 0, width: 300, height: 24))
+        txt.stringValue = ""
+        alert.accessoryView = txt
+        alert.window.initialFirstResponder = txt
+
+        if alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn {
+            let childFolder = txt.stringValue
+            if childFolder != "" {
+                do {
+                    try FileManager.default.createDirectory(atPath: "\(parent)/\(childFolder)", withIntermediateDirectories: false)
+                    tree.reload()
+                    folderView.reloadData()
+                } catch {
+                    MainController.showWarning("Failed creating '\(childFolder)': \(error)")
+                }
+            }
+        }
+    }
+
     func getActiveDirectory() -> String {
         let selectedItem = toTree(folderView.item(atRow: folderView.selectedRow))
         return selectedItem.folder
