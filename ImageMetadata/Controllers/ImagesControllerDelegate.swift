@@ -123,7 +123,6 @@ extension MainController {
 
             Async.main {
                 controller.operationCompleted()
-                self.reloadExistingFolder()
             }
         }
 

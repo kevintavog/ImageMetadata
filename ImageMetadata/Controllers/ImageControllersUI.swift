@@ -70,11 +70,13 @@ extension MainController {
         imagesView.selectionIndexPaths = selection
     }
 
-    func reloadExistingFolder() {
+    func reloadExistingFolder(keepSelection: Bool = true) {
         let selection = imagesView.selectionIndexPaths
         mediaProvider.refresh()
         applyFilters()
-        imagesView.selectionIndexPaths = selection
+        if keepSelection {
+            imagesView.selectionIndexPaths = selection
+        }
         setImagesStatus()
     }
 

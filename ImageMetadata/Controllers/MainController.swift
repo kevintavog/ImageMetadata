@@ -34,7 +34,7 @@ class MainController : NSWindowController, NSOutlineViewDelegate, NSOutlineViewD
     
     @IBOutlet weak var keywordsView: NSCollectionView!
     
-    var mediaProvider = MediaProvider()
+    var mediaProvider = MediaProvider(autoUpdate: false)
     var filteredViewItems = [MediaData]()
     var keywordsController: KeywordsController? = nil
     var selectedKeywords = FilesAndKeywords()

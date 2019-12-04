@@ -1,6 +1,6 @@
 //
 
-import AppKit
+import Cocoa
 import RangicCore
 
 extension MainController {
@@ -12,6 +12,8 @@ extension MainController {
         folderView.deselectAll(nil)
         folderView.reloadData()
         selectDirectoryViewRow(Preferences.lastSelectedFolder)
+
+        folderView.registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
     }
 
     @IBAction func createFolder(_ sender: Any) {
@@ -111,5 +113,59 @@ extension MainController {
         }
 
         return rootDirectory!
+    }
+
+    func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
+        let files = filePaths(info)
+
+        // Don't allow items to be dropped on the source folder. And ignore rows with no data
+        if item != nil {
+            let tree = toTree(item)
+            for f in files {
+                if f.starts(with: tree.folder) {
+                    return []
+                }
+            }
+            return .move
+        }
+
+        // Don't accept the drop
+        return []
+    }
+
+    func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
+        if item == nil {
+            return false
+        }
+
+        let files = filePaths(info)
+        let tree = toTree(item)
+
+        do {
+            for f in files {
+                let filename = (f as NSString).lastPathComponent
+                try FileManager.default.moveItem(atPath: f, toPath: "\(tree.folder)/\(filename)")
+            }
+        } catch {
+            MainController.showWarning("Failed moving files: \(error)")
+            return false
+        }
+
+        reloadExistingFolder(keepSelection: false)
+        return true
+    }
+
+    func filePaths(_ dragInfo: NSDraggingInfo) -> [String] {
+        var list = [String]()
+        if let urls = dragInfo.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: [:])  as? [URL] {
+            for u in urls {
+                let path = u.path
+                if FileManager.default.fileExists(atPath: path) {
+                    list.append(path)
+                }
+            }
+        }
+
+        return list
     }
 }
