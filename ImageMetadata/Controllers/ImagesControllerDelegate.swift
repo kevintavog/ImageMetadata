@@ -101,6 +101,35 @@ extension MainController {
         })
     }
 
+    @IBAction func resolveAllPlacenames(_ sender: Any) {
+        let mediaItems = filteredViewItems
+        if mediaItems.count < 1 {
+            MainController.showWarning("No items, nothing to do")
+            return
+        }
+
+        let controller = LogResultsController.create(header: "Resolving placenames")
+        Async.background {
+            for m in mediaItems {
+                if let location = m.location {
+                    controller.log("\(m.name!) -> ")
+                    let name = location.placenameAsString(.sites)
+                    controller.log("\(name)")
+                } else {
+                    controller.log("\(m.name!) -> < does not have a location >")
+                }
+                controller.log("\n")
+            }
+
+            Async.main {
+                controller.operationCompleted()
+                self.reloadExistingFolder()
+            }
+        }
+
+        NSApplication.shared.runModal(for: controller.window!)
+    }
+
     @IBAction func convertVideo(_ sender: Any) {
         let mediaItems = selectedMediaItems()
         if mediaItems.count < 1 {
