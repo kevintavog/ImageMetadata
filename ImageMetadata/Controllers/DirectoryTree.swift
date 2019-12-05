@@ -5,10 +5,12 @@ import RangicCore
 class DirectoryTree {
     let folder: String
     let relativePath: String
+    let parentTree: DirectoryTree?
     fileprivate var _subFolders: [DirectoryTree]?
 
 
     init(parent: DirectoryTree!, folder: String) {
+        self.parentTree = parent
         self.folder = folder
         if parent == nil {
             relativePath = ""

@@ -43,6 +43,38 @@ extension MainController {
         }
     }
 
+    @IBAction func renameFolder(_ sender: Any) {
+        if folderView.selectedRow == -1 {
+            return
+        }
+        let tree = toTree(folderView.item(atRow: folderView.selectedRow))
+        Logger.info("Rename '\(tree.folder)'")
+
+        let alert = NSAlert()
+        alert.messageText = "Rename '\(tree.relativePath)'"
+        alert.addButton(withTitle: "Rename")
+        alert.addButton(withTitle: "Cancel")
+
+        let txt = NSTextField(frame: NSRect(x: 0, y: 0, width: 300, height: 24))
+        txt.stringValue = "\(tree.relativePath)"
+        alert.accessoryView = txt
+        alert.window.initialFirstResponder = txt
+
+        if alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn {
+            let childFolder = txt.stringValue
+            if childFolder != "" && childFolder != tree.relativePath {
+                do {
+                    let newFolder = (tree.folder as NSString).deletingLastPathComponent.stringByAppendingPath(childFolder)
+                    try FileManager.default.moveItem(atPath: tree.folder, toPath: newFolder)
+                    tree.parentTree?.reload()
+                    folderView.reloadData()
+                } catch {
+                    MainController.showWarning("Failed renaming '\(childFolder)': \(error)")
+                }
+            }
+        }
+    }
+
     func getActiveDirectory() -> String {
         let selectedItem = toTree(folderView.item(atRow: folderView.selectedRow))
         return selectedItem.folder

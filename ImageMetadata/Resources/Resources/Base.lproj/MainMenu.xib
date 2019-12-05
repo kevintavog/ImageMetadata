@@ -873,6 +873,13 @@
         </menuItem>
         <menu id="erl-Mv-bmy">
             <items>
+                <menuItem title="Rename" id="8SF-v6-8gQ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="renameFolder:" target="rbl-N9-M9A" id="OYH-aW-FuK"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="sgO-DS-qRs"/>
                 <menuItem title="Create folder" id="in1-a3-cam">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
