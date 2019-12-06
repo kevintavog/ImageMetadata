@@ -37,4 +37,20 @@ class ImagesCollectionView : NSCollectionView {
             }
         }
     }
+    
+    override func rightMouseDown(with event: NSEvent) {
+        let clickedItem = indexPathForItem(at: convert(event.locationInWindow, from: nil))
+        if let clicked = clickedItem {
+            let priorSelection = selectionIndexPaths
+            var selected = selectionIndexPaths
+            selected.insert(clicked)
+            if selected.count != priorSelection.count {
+                var singleSelection = Set<IndexPath>()
+                singleSelection.insert(clicked)
+                selectionIndexPaths = singleSelection
+            }
+        }
+
+        super.rightMouseDown(with: event)
+    }
 }
