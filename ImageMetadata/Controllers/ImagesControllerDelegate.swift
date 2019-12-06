@@ -77,6 +77,7 @@ extension MainController {
             return "http://maps.google.com/maps?q=&layer=c&cbll=\(item.location.latitude),\(item.location.longitude)&cbp=11,0,0,0,0"
         })
     }
+
     @IBAction func setFileDateToMetadataDate(_ sender: Any) {
         let mediaItems = selectedMediaItems()
         if mediaItems.count < 1 {
@@ -93,6 +94,39 @@ extension MainController {
                 self.reloadExistingFolder()
             }
         }
+    }
+
+    @IBAction func removeDuplicateKeywords(_ sender: Any) {
+        let mediaItems = selectedMediaItems()
+        if mediaItems.count < 1 {
+            MainController.showWarning("No items selected")
+            return
+        }
+
+        let controller = LogResultsController.create(header: "Removing duplicate keywords")
+        Async.background {
+            for m in mediaItems {
+                if let keywords = m.keywords {
+                    let uniqueKeywords: Set = Set(keywords.map { $0 })
+                    if uniqueKeywords.count != keywords.count {
+                        controller.log("Fixing \(m.name!)\n")
+                        do {
+                            try ExifToolRunner.setKeywords([m.url!.path], keywords: Array(uniqueKeywords))
+                            m.reload()
+                        } catch {
+                            controller.log("Failed setting keywords for \(m.name!): \(error)")
+                        }
+                    }
+                }
+            }
+
+            Async.main {
+                controller.operationCompleted()
+                self.reloadExistingFolder()
+            }
+        }
+
+        NSApplication.shared.runModal(for: controller.window!)
     }
 
     @IBAction func showInFinder(_ sender: Any) {

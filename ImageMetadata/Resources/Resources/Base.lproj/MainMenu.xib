@@ -87,6 +87,13 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="dk7-ps-xVH"/>
+                <menuItem title="Remove duplicate keywords" id="yQq-0l-jXT">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="removeDuplicateKeywords:" target="rbl-N9-M9A" id="qY0-z8-Y9k"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="VTF-93-ljV"/>
                 <menuItem title="Convert video" id="NMF-t6-ST3">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -213,6 +220,13 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="setTime:" target="rbl-N9-M9A" id="j2G-g7-lFY"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="tHL-Z4-4YF"/>
+                            <menuItem title="Remove duplicate keywords" id="uGZ-pl-Wcg">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="removeDuplicateKeywords:" target="rbl-N9-M9A" id="wVt-Dv-3QY"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="GOH-9h-P6O"/>

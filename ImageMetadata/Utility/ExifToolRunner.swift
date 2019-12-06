@@ -96,6 +96,19 @@ open class ExifToolRunner {
             + filePaths)
     }
     
+    static public func setKeywords(_ filePaths: [String], keywords: [String]) throws {
+        var keywordCommands = [String]()
+        for s in keywords {
+            keywordCommands.append("-IPTC:Keywords=\(s)")
+            keywordCommands.append("-XMP:Subject=\(s)")
+        }
+
+        let _ = try runExifTool(
+            [ "-P", "-overwrite_original"]
+                + keywordCommands
+                + filePaths)
+    }
+
     static public func updateKeywords(_ filePaths: [String], addedKeywords: [String], removedKeywords: [String]) throws -> Bool {
         if addedKeywords.count == 0 && removedKeywords.count == 0 {
             return false
