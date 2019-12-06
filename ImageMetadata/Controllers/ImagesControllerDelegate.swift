@@ -101,6 +101,29 @@ extension MainController {
         })
     }
 
+    func doubleClicked(item: IndexPath) {
+        if imagesView.selectionIndexPaths.count > 0 {
+            viewMedia(self)
+        }
+    }
+
+    @IBAction func viewMedia(_ sender: Any) {
+        let mediaItems = selectedMediaItems()
+        var url: URL? = nil
+
+        if mediaItems.count == 0 {
+            url = filteredViewItems.first?.url
+        } else {
+            url = mediaItems.first?.url
+        }
+
+        if let realUrl = url {
+            if NSWorkspace.shared.open(realUrl) == false {
+                MainController.showWarning("Failed opening file: '\(realUrl.path)'")
+            }
+        }
+    }
+
     @IBAction func resolveAllPlacenames(_ sender: Any) {
         let mediaItems = filteredViewItems
         if mediaItems.count < 1 {

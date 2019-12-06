@@ -6,8 +6,8 @@ import WebKit
 
 import RangicCore
 
-class MainController : NSWindowController, NSOutlineViewDelegate, NSOutlineViewDataSource, NSCollectionViewDataSource, NSCollectionViewDelegate, WKNavigationDelegate, WKScriptMessageHandler {
-    
+class MainController : NSWindowController, NSOutlineViewDelegate, ImagesCollectionViewDelegate, NSOutlineViewDataSource, NSCollectionViewDataSource, NSCollectionViewDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+
     var rootDirectory: DirectoryTree?
 
 

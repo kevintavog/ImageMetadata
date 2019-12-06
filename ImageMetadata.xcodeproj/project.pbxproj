@@ -27,6 +27,7 @@
 		4429271323930CE400D4E705 /* SetDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429271223930CE400D4E705 /* SetDateController.swift */; };
 		4429271723932B4800D4E705 /* AdjustDate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4429271623932B4800D4E705 /* AdjustDate.xib */; };
 		442927192393319800D4E705 /* AdjustDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442927182393319800D4E705 /* AdjustDateController.swift */; };
+		4429271B2398A66B00D4E705 /* ImagesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429271A2398A66B00D4E705 /* ImagesCollectionView.swift */; };
 		4430CF342381E7FF0046D876 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430CF332381E7FF0046D876 /* AppDelegate.swift */; };
 		4430CF362381E8000046D876 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4430CF352381E8000046D876 /* Assets.xcassets */; };
 		4430CF392381E8000046D876 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4430CF372381E8000046D876 /* MainMenu.xib */; };
@@ -90,6 +91,7 @@
 		4429271223930CE400D4E705 /* SetDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDateController.swift; sourceTree = "<group>"; };
 		4429271623932B4800D4E705 /* AdjustDate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdjustDate.xib; sourceTree = "<group>"; };
 		442927182393319800D4E705 /* AdjustDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustDateController.swift; sourceTree = "<group>"; };
+		4429271A2398A66B00D4E705 /* ImagesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesCollectionView.swift; sourceTree = "<group>"; };
 		4430CF302381E7FF0046D876 /* ImageMetadata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageMetadata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4430CF332381E7FF0046D876 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4430CF352381E8000046D876 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				442927182393319800D4E705 /* AdjustDateController.swift */,
 				4430CF472381F7070046D876 /* DirectoryTree.swift */,
 				4430CF452381F5540046D876 /* FolderController.swift */,
+				4429271A2398A66B00D4E705 /* ImagesCollectionView.swift */,
 				443A8F6A2383001500BD712B /* ImagesControllerDataSource.swift */,
 				442926EC2383475800D4E705 /* ImagesControllerDelegate.swift */,
 				442926EE2383491A00D4E705 /* ImageControllersUI.swift */,
@@ -332,6 +335,7 @@
 				442927192393319800D4E705 /* AdjustDateController.swift in Sources */,
 				4430CF342381E7FF0046D876 /* AppDelegate.swift in Sources */,
 				443A8F762383123F00BD712B /* ImagesViewItem.swift in Sources */,
+				4429271B2398A66B00D4E705 /* ImagesCollectionView.swift in Sources */,
 				442926F42383799600D4E705 /* MapViewController.swift in Sources */,
 				443A8F712383093500BD712B /* Preferences.swift in Sources */,
 				4429271323930CE400D4E705 /* SetDateController.swift in Sources */,

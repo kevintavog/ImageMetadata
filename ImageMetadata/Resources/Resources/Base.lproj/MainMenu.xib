@@ -672,7 +672,7 @@
                                                             <rect key="frame" x="1" y="1" width="530" height="273"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <collectionView selectable="YES" allowsMultipleSelection="YES" id="sXV-UH-LvJ">
+                                                                <collectionView selectable="YES" allowsMultipleSelection="YES" id="sXV-UH-LvJ" customClass="ImagesCollectionView" customModule="ImageMetadata" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="530" height="158"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="CkL-6q-4NR">

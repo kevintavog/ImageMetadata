@@ -320,18 +320,6 @@ extension MainController {
         return mediaItems
     }
 
-    @IBAction func viewMedia(_ sender: Any) {
-        let mediaItems = selectedMediaItems()
-        if mediaItems.count != 1 {
-            Logger.info("Only 1 file can be opened, there are \(mediaItems.count) selected")
-            return
-        }
-
-        if NSWorkspace.shared.open(mediaItems.first!.url!) == false {
-            MainController.showWarning("Failed opening file: '\(mediaItems.first!.url!.path)'")
-        }
-    }
-
     func separateVideoList(_ filePaths: [String]) -> (imagePathList:[String], videoPathList:[String]) {
         var mediaItems = [MediaData]()
         for path in filePaths {
