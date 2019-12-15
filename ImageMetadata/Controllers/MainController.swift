@@ -83,9 +83,6 @@ class MainController : NSWindowController, NSOutlineViewDelegate, ImagesCollecti
         }
     }
 
-    @IBAction func copyMetadata(_ sender: Any) {
-    }
-
     static func showWarning(_ message: String) {
         Logger.error(message)
         let alert = NSAlert()

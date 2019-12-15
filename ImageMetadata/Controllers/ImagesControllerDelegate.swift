@@ -231,7 +231,7 @@ extension MainController: QLPreviewPanelDataSource, QLPreviewPanelDelegate {
 
         let controller = AdjustDateController.create(media: mediaItems)
         let result = NSApplication.shared.runModal(for: controller.window!)
-        if result == NSApplication.ModalResponse.OK {
+        if result == .OK {
             let (hours, minutes, seconds) = controller.offsets()
             Async.background {
                 do {
@@ -261,7 +261,7 @@ extension MainController: QLPreviewPanelDataSource, QLPreviewPanelDelegate {
         visitFirstSelectedItem( { (mediaItem: MediaData) -> () in
             let controller = SetDateController.create(file: mediaItem.fileTimestamp!, metadata: mediaItem.timestamp!)
             let result = NSApplication.shared.runModal(for: controller.window!)
-            if result == NSApplication.ModalResponse.OK {
+            if result == .OK {
                 if let newDate = controller.newDate() as NSDate? {
                     Async.background {
                         do {
@@ -282,6 +282,45 @@ extension MainController: QLPreviewPanelDataSource, QLPreviewPanelDelegate {
                         }
                     }
                 }
+            }
+        })
+    }
+
+    @IBAction func copyMetadata(_ sender: Any) {
+        visitFirstSelectedItem( { (mediaItem: MediaData) -> () in
+
+            let panel = NSOpenPanel()
+            panel.canChooseFiles = true
+            panel.canChooseDirectories = false
+            panel.canCreateDirectories = false
+            panel.allowsMultipleSelection = false
+            panel.title = "Choose the metadata destination"
+
+            panel.directoryURL = mediaItem.url!.deletingLastPathComponent()
+
+            panel.beginSheetModal(for: self.window!) { response in
+                if response == .OK {
+                    let destPath = panel.url!.path
+                    Async.background {
+                        do {
+                            _ = try ExifToolRunner.copyMetadata(mediaItem.url!.path, destPath)
+                            if let destMediaItem = self.mediaProvider.itemFromFilePath(destPath) {
+                                destMediaItem.reload()
+                                Async.main {
+                                    self.reloadMediaDataItems([destMediaItem])
+                                }
+                            }
+                        } catch let error {
+                            Logger.error("Copying metadata failed: \(error)")
+
+                            Async.main {
+                                MainController.showWarning("Copying metadata failed: \(error)")
+                            }
+                        }
+                    }
+                    Logger.info("copy metadata; source=\(mediaItem.url!.path); dest=\(destPath)")
+                }
+                panel.close()
             }
         })
     }

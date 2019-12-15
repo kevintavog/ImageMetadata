@@ -37,6 +37,7 @@
                 <outlet property="menuSatelliteMap" destination="9gK-4H-bcd" id="ASf-cp-x1d"/>
                 <outlet property="tabView" destination="Z69-RZ-nht" id="IMK-qA-MEd"/>
                 <outlet property="timestampState" destination="XLt-ww-irJ" id="fUY-qZ-Ipq"/>
+                <outlet property="window" destination="QvC-M9-y7g" id="wBI-iZ-8Pd"/>
             </connections>
         </viewController>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
