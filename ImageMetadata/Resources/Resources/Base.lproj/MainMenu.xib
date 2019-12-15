@@ -67,6 +67,12 @@
                         <action selector="showInFinder:" target="rbl-N9-M9A" id="dc5-kM-MjJ"/>
                     </connections>
                 </menuItem>
+                <menuItem title="Quicklook" keyEquivalent=" " id="BxG-5T-9xD">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="quickLook:" target="rbl-N9-M9A" id="6rG-9B-7MB"/>
+                    </connections>
+                </menuItem>
                 <menuItem isSeparatorItem="YES" id="1Hs-kD-brF"/>
                 <menuItem title="Set file date to metadata" id="2ff-NX-Wfi">
                     <modifierMask key="keyEquivalentModifierMask"/>
@@ -84,6 +90,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="setTime:" target="rbl-N9-M9A" id="paW-jd-43T"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Copy metadata..." id="JBi-bx-vEP">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="copyMetadata:" target="rbl-N9-M9A" id="Uqb-4P-OrI"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="dk7-ps-xVH"/>
@@ -203,6 +215,12 @@
                                     <action selector="showInFinder:" target="rbl-N9-M9A" id="Ekk-9a-qZY"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Quicklook" keyEquivalent=" " id="eqr-NT-cbq">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="quickLook:" target="rbl-N9-M9A" id="vhg-8Q-rIZ"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="4sG-V4-Xoc"/>
                             <menuItem title="Set file date to metadata" id="HG8-bo-fPr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -222,6 +240,12 @@
                                     <action selector="setTime:" target="rbl-N9-M9A" id="j2G-g7-lFY"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Copy metadata..." id="Zqn-aD-92b">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="copyMetadata:" target="rbl-N9-M9A" id="IDL-Wj-CXd"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="tHL-Z4-4YF"/>
                             <menuItem title="Remove duplicate keywords" id="uGZ-pl-Wcg">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -229,7 +253,7 @@
                                     <action selector="removeDuplicateKeywords:" target="rbl-N9-M9A" id="wVt-Dv-3QY"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="GOH-9h-P6O"/>
+                            <menuItem isSeparatorItem="YES" id="dnT-Yz-hCc"/>
                             <menuItem title="Resolve all placenames" id="FDp-I6-Lgc">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>

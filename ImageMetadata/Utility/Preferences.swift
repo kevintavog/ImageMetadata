@@ -7,6 +7,7 @@ class Preferences : BasePreferences {
     static fileprivate let PlacenameLevelKey = "PlacenameLevel"
     static fileprivate let LastSelectedFolderKey = "LastSelectedFolder"
     static fileprivate let LastImportedFolderKey = "LastImportedFolder"
+    static fileprivate let LastDevImportedFolderKey = "LastDevImportedFolder"
 
 
     enum PlacenameLevel: Int {
@@ -46,8 +47,18 @@ class Preferences : BasePreferences {
     }
 
     static var lastImportedFolder : String {
-        get { return stringForKey(LastImportedFolderKey) }
-        set { super.setValue(newValue, key: LastImportedFolderKey) }
+        get { return stringForKey(importedFolderKey) }
+        set { super.setValue(newValue, key: importedFolderKey) }
+    }
+
+    private static var importedFolderKey: String {
+        get {
+            #if DEBUG
+            return LastDevImportedFolderKey
+            #else
+            return LastImportedFolderKey
+            #endif
+        }
     }
 
     static var preferencesFolder: String {

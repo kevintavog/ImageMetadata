@@ -15,6 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Logger.configure()
         Preferences.setMissingDefaults()
         ReverseNameLookupProvider.set(host: Preferences.baseLocationLookup)
+        SupportedMediaTypes.includeRawImages = true
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {

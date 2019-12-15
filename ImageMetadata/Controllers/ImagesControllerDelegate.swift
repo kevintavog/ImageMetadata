@@ -1,11 +1,12 @@
 //
 
 import Cocoa
+import Quartz
 import RangicCore
 import Async
 
 // Implement NSCollectionViewDelegate for `imageView`
-extension MainController {
+extension MainController: QLPreviewPanelDataSource, QLPreviewPanelDelegate {
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         selectionChanged(indexPaths, true)
     }
@@ -204,7 +205,7 @@ extension MainController {
         let controller = LogResultsController.create(header: "Convert video")
         Async.background {
             for m in videos {
-                let rotationOption = self.getRotationOption(m)
+                let rotationOption = HandBrakeRunner.getRotationOption(m.rotation)
 
                 let sourceName = "\(folder)/\(m.name!)"
                 let destinationName = "\(folder)/\(m.nameWithoutExtension)_V.MP4"
@@ -285,23 +286,25 @@ extension MainController {
         })
     }
 
-    func getRotationOption(_ mediaData: MediaData) -> String {
-        if let rotation = mediaData.rotation {
-            switch rotation {
-            case 90:
-                return "--rotate=4"
-            case 180:
-                return "--rotate=3"
-            case 270:
-                return "--rotate=7"
-            case 0:
-                return ""
-            default:
-                Logger.warn("Unhandled rotation \(mediaData.rotation!)")
-                return ""
-            }
+    @IBAction func quickLook(_ sender: Any) {
+        quickLookItems = selectedMediaItems()
+        if quickLookItems.count < 1 {
+            MainController.showWarning("No items selected.")
+            return
         }
-        return ""
+
+        if let panel = QLPreviewPanel.shared() {
+            panel.delegate = self
+            panel.dataSource = self
+            panel.makeKeyAndOrderFront(self)
+        }
     }
 
+    func numberOfPreviewItems(in panel: QLPreviewPanel!) -> Int {
+        return quickLookItems.count
+    }
+    
+    func previewPanel(_ panel: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
+        return quickLookItems[index].url as QLPreviewItem
+    }
 }

@@ -43,7 +43,7 @@ class LogResultsController : NSWindowController, LogResults {
 
     @IBAction func cancel(_ sender: Any) {
         close()
-        NSApplication.shared.stopModal(withCode: NSApplication.ModalResponse(rawValue: 0))
+        NSApplication.shared.stopModal(withCode: NSApplication.ModalResponse.cancel)
     }
 
 

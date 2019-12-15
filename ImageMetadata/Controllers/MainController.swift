@@ -6,10 +6,9 @@ import WebKit
 
 import RangicCore
 
+import Async
+
 class MainController : NSWindowController, NSOutlineViewDelegate, ImagesCollectionViewDelegate, NSOutlineViewDataSource, NSCollectionViewDataSource, NSCollectionViewDelegate, WKNavigationDelegate, WKScriptMessageHandler {
-
-    var rootDirectory: DirectoryTree?
-
 
     @IBOutlet weak var folderView: NSOutlineView!
 
@@ -21,23 +20,26 @@ class MainController : NSWindowController, NSOutlineViewDelegate, ImagesCollecti
     @IBOutlet weak var timestampState: NSButton!
     @IBOutlet weak var mapView: MapWebView!
 
-    var followSelectionOnMap = true
     @IBOutlet weak var menuFollowSelectionOnMap: NSMenuItem!
     @IBOutlet weak var menuRegularMap: NSMenuItem!
     @IBOutlet weak var menuDarkMap: NSMenuItem!
     @IBOutlet weak var menuSatelliteMap: NSMenuItem!
     @IBOutlet weak var menuOpenStreetMaps: NSMenuItem!
-    
+
     @IBOutlet weak var tabView: NSTabView!
     @IBOutlet weak var locationTabItem: NSTabViewItem!
     @IBOutlet weak var keywordsTabItem: NSTabViewItem!
-    
+
     @IBOutlet weak var keywordsView: NSCollectionView!
-    
+
+
+    var rootDirectory: DirectoryTree?
+    var followSelectionOnMap = true
     var mediaProvider = MediaProvider(autoUpdate: false)
     var filteredViewItems = [MediaData]()
     var keywordsController: KeywordsController? = nil
     var selectedKeywords = FilesAndKeywords()
+    var quickLookItems = [MediaData]()
 
 
     override func awakeFromNib() {
@@ -62,7 +64,26 @@ class MainController : NSWindowController, NSOutlineViewDelegate, ImagesCollecti
     }
 
     @IBAction func `import`(_ sender: Any) {
-        MainController.showWarning("'import' not implemented")
+        let controller = ImportMediaController.create()
+        let result = NSApplication.shared.runModal(for: controller.window!)
+        if result == NSApplication.ModalResponse.OK {
+            let importList = controller.getImportList()
+
+            let logController = LogResultsController.create(header: "Importing media")
+            Async.background {
+                ImportMedia.run(self.rootDirectory!.folder, importList, logController)
+                Async.main {
+                    logController.operationCompleted()
+                    self.rootDirectory?.reload()
+                    self.folderView.reloadData()
+                }
+            }
+
+            NSApplication.shared.runModal(for: logController.window!)
+        }
+    }
+
+    @IBAction func copyMetadata(_ sender: Any) {
     }
 
     static func showWarning(_ message: String) {

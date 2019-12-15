@@ -4,6 +4,25 @@ import RangicCore
 
 // Use the HandBrake command line - it uses ffmpeg and  is both easier to install and has a more stable CLI than ffmpeg
 open class HandBrakeRunner {
+    static public func getRotationOption(_ rotation: Int?) -> String {
+        if let rot = rotation {
+            switch rot {
+            case 90:
+                return "--rotate=4"
+            case 180:
+                return "--rotate=3"
+            case 270:
+                return "--rotate=7"
+            case 0:
+                return ""
+            default:
+                Logger.warn("Unhandled rotation \(rot)")
+                return ""
+            }
+        }
+        return ""
+    }
+
     static public func convertVideo(_ sourceName: String, _ destinationName: String, _ rotationOption: String,
                                     _ logger: LogResults) {
         let handbrakePath = "/Applications/Extras/HandBrakeCLI"

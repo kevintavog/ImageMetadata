@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4426EB05239DA88100C0E019 /* ImportMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4426EB04239DA88100C0E019 /* ImportMedia.swift */; };
 		442926ED2383475800D4E705 /* ImagesControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442926EC2383475800D4E705 /* ImagesControllerDelegate.swift */; };
 		442926EF2383491A00D4E705 /* ImageControllersUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442926EE2383491A00D4E705 /* ImageControllersUI.swift */; };
 		442926F2238376C200D4E705 /* MapWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442926F1238376C200D4E705 /* MapWebView.swift */; };
@@ -44,6 +45,8 @@
 		443A8F772383123F00BD712B /* ImagesViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443A8F752383123F00BD712B /* ImagesViewItem.xib */; };
 		443A8F79238321C500BD712B /* SensitiveLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A8F78238321C500BD712B /* SensitiveLocations.swift */; };
 		443A8F7C2383265700BD712B /* Async in Frameworks */ = {isa = PBXBuildFile; productRef = 443A8F7B2383265700BD712B /* Async */; };
+		44B1D0CB239C3B8A00C2068F /* ImportMedia.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B1D0CA239C3B8A00C2068F /* ImportMedia.xib */; };
+		44B1D0CE239C428700C2068F /* ImportMediaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B1D0CD239C428700C2068F /* ImportMediaController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4426EB04239DA88100C0E019 /* ImportMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportMedia.swift; sourceTree = "<group>"; };
 		442926EC2383475800D4E705 /* ImagesControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesControllerDelegate.swift; sourceTree = "<group>"; };
 		442926EE2383491A00D4E705 /* ImageControllersUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageControllersUI.swift; sourceTree = "<group>"; };
 		442926F1238376C200D4E705 /* MapWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWebView.swift; sourceTree = "<group>"; };
@@ -108,6 +112,8 @@
 		443A8F742383123F00BD712B /* ImagesViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewItem.swift; sourceTree = "<group>"; };
 		443A8F752383123F00BD712B /* ImagesViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagesViewItem.xib; sourceTree = "<group>"; };
 		443A8F78238321C500BD712B /* SensitiveLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensitiveLocations.swift; sourceTree = "<group>"; };
+		44B1D0CA239C3B8A00C2068F /* ImportMedia.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportMedia.xib; sourceTree = "<group>"; };
+		44B1D0CD239C428700C2068F /* ImportMediaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportMediaController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +188,7 @@
 				4429271623932B4800D4E705 /* AdjustDate.xib */,
 				4430CF3B2381E8000046D876 /* ImageMetadata.entitlements */,
 				443A8F752383123F00BD712B /* ImagesViewItem.xib */,
+				44B1D0CA239C3B8A00C2068F /* ImportMedia.xib */,
 				442927072389EB7B00D4E705 /* KeywordsViewItem.xib */,
 				442926FE2389A8BD00D4E705 /* LogResultsWindow.xib */,
 				4429271023930A2600D4E705 /* SetDate.xib */,
@@ -200,6 +207,7 @@
 				442926EC2383475800D4E705 /* ImagesControllerDelegate.swift */,
 				442926EE2383491A00D4E705 /* ImageControllersUI.swift */,
 				443A8F742383123F00BD712B /* ImagesViewItem.swift */,
+				44B1D0CD239C428700C2068F /* ImportMediaController.swift */,
 				442927002389AAA400D4E705 /* LogResultsController.swift */,
 				4429270B2389EF2400D4E705 /* KeywordsController.swift */,
 				442927062389EB7B00D4E705 /* KeywordsViewItem.swift */,
@@ -217,6 +225,7 @@
 				442926F92388BCEF00D4E705 /* ExifToolRunner.swift */,
 				4429270E238B0EAF00D4E705 /* FilesAndKeywords.swift */,
 				442926FB2388D74600D4E705 /* HandBrakeRunner.swift */,
+				4426EB04239DA88100C0E019 /* ImportMedia.swift */,
 				442927042389E76700D4E705 /* Keywords.swift */,
 				442927022389ADFE00D4E705 /* LogResultsProtocol.swift */,
 				443A8F702383093500BD712B /* Preferences.swift */,
@@ -310,6 +319,7 @@
 			files = (
 				4429271723932B4800D4E705 /* AdjustDate.xib in Resources */,
 				442926FF2389A8BD00D4E705 /* LogResultsWindow.xib in Resources */,
+				44B1D0CB239C3B8A00C2068F /* ImportMedia.xib in Resources */,
 				442927092389EB7B00D4E705 /* KeywordsViewItem.xib in Resources */,
 				4430CF362381E8000046D876 /* Assets.xcassets in Resources */,
 				442926F623837AA400D4E705 /* map.html in Resources */,
@@ -338,6 +348,7 @@
 				4429271B2398A66B00D4E705 /* ImagesCollectionView.swift in Sources */,
 				442926F42383799600D4E705 /* MapViewController.swift in Sources */,
 				443A8F712383093500BD712B /* Preferences.swift in Sources */,
+				4426EB05239DA88100C0E019 /* ImportMedia.swift in Sources */,
 				4429271323930CE400D4E705 /* SetDateController.swift in Sources */,
 				4429270C2389EF2400D4E705 /* KeywordsController.swift in Sources */,
 				442927032389ADFE00D4E705 /* LogResultsProtocol.swift in Sources */,
@@ -349,6 +360,7 @@
 				4430CF482381F7070046D876 /* DirectoryTree.swift in Sources */,
 				443A8F6B2383001500BD712B /* ImagesControllerDataSource.swift in Sources */,
 				442927082389EB7B00D4E705 /* KeywordsViewItem.swift in Sources */,
+				44B1D0CE239C428700C2068F /* ImportMediaController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
