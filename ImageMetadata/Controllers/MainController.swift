@@ -48,11 +48,11 @@ class MainController : NSWindowController, NSOutlineViewDelegate, ImagesCollecti
         keywordsController = KeywordsController.initializeView(keywordsView)
 
 
-        #if DEBUG
-        initializeDirectoryView(FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Pictures/To Server/Radish").path)
-        #else
+//        #if DEBUG
+//        initializeDirectoryView(FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Pictures/To Server/Radish").path)
+//        #else
         initializeDirectoryView(FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Pictures/master").path)
-        #endif
+//        #endif
     }
 
     @IBAction func activateKeywords(_ sender: Any) {

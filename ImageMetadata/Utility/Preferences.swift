@@ -16,7 +16,7 @@ class Preferences : BasePreferences {
 
 
     static func setMissingDefaults() {
-        setDefaultValue("http://jupiter/reversenamelookup", key: BaseLocationLookupKey)
+        setDefaultValue("http://jupiter/api/reversename", key: BaseLocationLookupKey)
         setDefaultValue(PlacenameLevel.medium.rawValue, key: PlacenameLevelKey)
     }
 

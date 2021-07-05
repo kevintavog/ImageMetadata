@@ -3,7 +3,6 @@
 import Cocoa
 import RangicCore
 
-
 struct ImportFileInfo {
     let filename: String
     let yearMonthDay: String
@@ -18,13 +17,13 @@ class DateTableEntry {
     var checked = false
     let date: String
     var count: Int = 1
-    
+
     init(_ date: String) {
         self.date = date
     }
 }
 
-class ImportMediaController : NSWindowController, NSTableViewDataSource {
+class ImportMediaController: NSWindowController, NSTableViewDataSource {
     @IBOutlet weak var selectedFolderLabel: NSTextField!
     @IBOutlet weak var folderInfoLabel: NSTextField!
     @IBOutlet weak var dateTable: NSTableView!
@@ -35,7 +34,7 @@ class ImportMediaController : NSWindowController, NSTableViewDataSource {
     // The exported & original files (full paths), indexed by date
     var exportedDateFiles = [String:[String]]()
     var originalDateFiles = [String:[String]]()
-    
+
     func getImportList() -> [DateAndFiles] {
         var importList = [DateAndFiles]()
         for e in exportsAvailable {
@@ -44,7 +43,7 @@ class ImportMediaController : NSWindowController, NSTableViewDataSource {
                     e.date, exportedDateFiles[e.date] ?? [], originalDateFiles[e.date] ?? []))
             }
         }
-        
+
         return importList
     }
 

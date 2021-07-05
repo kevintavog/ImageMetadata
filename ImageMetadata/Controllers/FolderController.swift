@@ -92,6 +92,7 @@ extension MainController {
         var exactMatch = false
         var startRow = 0
         var hasMatch = false
+        var previousBestRow = -1
 
         repeat {
             hasMatch = false
@@ -105,8 +106,16 @@ extension MainController {
                 }
 
                 if folderName.lowercased().hasPrefix(dt.folder.lowercased()) {
-                    bestRow = row
+                    // Don't get stuck in an infinite loop if the folder can't be found
+                    if previousBestRow == row {
+                        folderView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+                        folderView.scrollRowToVisible(row)
+                        break
+                    }
+
                     hasMatch = true
+                    previousBestRow = bestRow
+                    bestRow = row
                 }
             }
 

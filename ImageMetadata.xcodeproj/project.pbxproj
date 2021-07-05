@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -37,14 +37,18 @@
 		4430CF482381F7070046D876 /* DirectoryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430CF472381F7070046D876 /* DirectoryTree.swift */; };
 		4430CF5C238215180046D876 /* RangicCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4430CF59238214D20046D876 /* RangicCore.framework */; };
 		4430CF5D238215180046D876 /* RangicCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4430CF59238214D20046D876 /* RangicCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4430CF6423821D0C0046D876 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 4430CF6323821D0C0046D876 /* SwiftyJSON */; };
 		443A8F6B2383001500BD712B /* ImagesControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A8F6A2383001500BD712B /* ImagesControllerDataSource.swift */; };
 		443A8F6D238300FD00BD712B /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443A8F6C238300FD00BD712B /* Quartz.framework */; };
 		443A8F712383093500BD712B /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A8F702383093500BD712B /* Preferences.swift */; };
 		443A8F762383123F00BD712B /* ImagesViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A8F742383123F00BD712B /* ImagesViewItem.swift */; };
 		443A8F772383123F00BD712B /* ImagesViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443A8F752383123F00BD712B /* ImagesViewItem.xib */; };
 		443A8F79238321C500BD712B /* SensitiveLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A8F78238321C500BD712B /* SensitiveLocations.swift */; };
-		443A8F7C2383265700BD712B /* Async in Frameworks */ = {isa = PBXBuildFile; productRef = 443A8F7B2383265700BD712B /* Async */; };
+		4499D9002693B11E000CF34A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4499D8FC2693B11E000CF34A /* Alamofire.framework */; };
+		4499D9012693B11E000CF34A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4499D8FC2693B11E000CF34A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4499D9022693B11E000CF34A /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4499D8FE2693B11E000CF34A /* Async.framework */; };
+		4499D9032693B11E000CF34A /* Async.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4499D8FE2693B11E000CF34A /* Async.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4499D9042693B11E000CF34A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4499D8FF2693B11E000CF34A /* SwiftyJSON.framework */; };
+		4499D9052693B11E000CF34A /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4499D8FF2693B11E000CF34A /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44B1D0CB239C3B8A00C2068F /* ImportMedia.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B1D0CA239C3B8A00C2068F /* ImportMedia.xib */; };
 		44B1D0CE239C428700C2068F /* ImportMediaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B1D0CD239C428700C2068F /* ImportMediaController.swift */; };
 /* End PBXBuildFile section */
@@ -66,7 +70,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4499D9052693B11E000CF34A /* SwiftyJSON.framework in Embed Frameworks */,
 				4430CF5D238215180046D876 /* RangicCore.framework in Embed Frameworks */,
+				4499D9012693B11E000CF34A /* Alamofire.framework in Embed Frameworks */,
+				4499D9032693B11E000CF34A /* Async.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,6 +119,9 @@
 		443A8F742383123F00BD712B /* ImagesViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewItem.swift; sourceTree = "<group>"; };
 		443A8F752383123F00BD712B /* ImagesViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagesViewItem.xib; sourceTree = "<group>"; };
 		443A8F78238321C500BD712B /* SensitiveLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensitiveLocations.swift; sourceTree = "<group>"; };
+		4499D8FC2693B11E000CF34A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
+		4499D8FE2693B11E000CF34A /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = Carthage/Build/Mac/Async.framework; sourceTree = "<group>"; };
+		4499D8FF2693B11E000CF34A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/Mac/SwiftyJSON.framework; sourceTree = "<group>"; };
 		44B1D0CA239C3B8A00C2068F /* ImportMedia.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportMedia.xib; sourceTree = "<group>"; };
 		44B1D0CD239C428700C2068F /* ImportMediaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportMediaController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,9 +133,10 @@
 			files = (
 				442926F823837BC700D4E705 /* WebKit.framework in Frameworks */,
 				443A8F6D238300FD00BD712B /* Quartz.framework in Frameworks */,
-				4430CF6423821D0C0046D876 /* SwiftyJSON in Frameworks */,
+				4499D9042693B11E000CF34A /* SwiftyJSON.framework in Frameworks */,
 				4430CF5C238215180046D876 /* RangicCore.framework in Frameworks */,
-				443A8F7C2383265700BD712B /* Async in Frameworks */,
+				4499D9002693B11E000CF34A /* Alamofire.framework in Frameworks */,
+				4499D9022693B11E000CF34A /* Async.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +174,9 @@
 		4430CF492382134B0046D876 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4499D8FC2693B11E000CF34A /* Alamofire.framework */,
+				4499D8FE2693B11E000CF34A /* Async.framework */,
+				4499D8FF2693B11E000CF34A /* SwiftyJSON.framework */,
 				442926F723837BC700D4E705 /* WebKit.framework */,
 				443A8F6C238300FD00BD712B /* Quartz.framework */,
 				4430CF54238214D20046D876 /* RangicCore.xcodeproj */,
@@ -252,8 +266,6 @@
 			);
 			name = ImageMetadata;
 			packageProductDependencies = (
-				4430CF6323821D0C0046D876 /* SwiftyJSON */,
-				443A8F7B2383265700BD712B /* Async */,
 			);
 			productName = ImageMetadata;
 			productReference = 4430CF302381E7FF0046D876 /* ImageMetadata.app */;
@@ -284,8 +296,6 @@
 			);
 			mainGroup = 4430CF272381E7FF0046D876;
 			packageReferences = (
-				4430CF6223821D0C0046D876 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				443A8F7A2383265700BD712B /* XCRemoteSwiftPackageReference "Async" */,
 			);
 			productRefGroup = 4430CF312381E7FF0046D876 /* Products */;
 			projectDirPath = "";
@@ -499,6 +509,10 @@
 				CODE_SIGN_ENTITLEMENTS = ImageMetadata/Resources/ImageMetadata.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = ImageMetadata/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -517,6 +531,10 @@
 				CODE_SIGN_ENTITLEMENTS = ImageMetadata/Resources/ImageMetadata.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = ImageMetadata/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -550,38 +568,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		4430CF6223821D0C0046D876 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-		443A8F7A2383265700BD712B /* XCRemoteSwiftPackageReference "Async" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/duemunk/Async";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		4430CF6323821D0C0046D876 /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4430CF6223821D0C0046D876 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
-		443A8F7B2383265700BD712B /* Async */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 443A8F7A2383265700BD712B /* XCRemoteSwiftPackageReference "Async" */;
-			productName = Async;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4430CF282381E7FF0046D876 /* Project object */;
 }

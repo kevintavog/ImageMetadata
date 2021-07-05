@@ -203,12 +203,13 @@ extension MainController {
     func mapShowDetailedPlacename(_ lat: Double, _ lon: Double) {
         let location = Location(latitude: lat, longitude: lon)
         let locationJsonStr = location.toDms().replacingOccurrences(of: "\"", with: "\\\"")
-        let message = "Looking up \(locationJsonStr)"
+        let message = "Looking up \(locationJsonStr)..."
         let _ = mapView.invokeMapScript("setPopup([\(lat), \(lon)], \"\(message)\")")
         Async.background {
-            let placename = location.placenameAsString(.none)
+            let fullname = location.placenameAsString(.none)
+            let sites = location.asPlacename()?.name(.sites) ?? ""
             Async.main {
-                self.mapView.invokeMapScript("setPopup([\(lat), \(lon)], \"\(placename)\")")
+                let _ = self.mapView.invokeMapScript("setPopup([\(lat), \(lon)], \"\(sites) <br/> <br/> \(fullname)\")")
             }
         }
     }

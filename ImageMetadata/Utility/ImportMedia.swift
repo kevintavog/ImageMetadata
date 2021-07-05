@@ -7,14 +7,13 @@ struct DateAndFiles {
     let date: String
     let exportedPaths: [String]
     let originalPaths: [String]
-    
+
     init(_ date: String, _ exported: [String], _ original: [String]) {
         self.date = date
         self.exportedPaths = exported
         self.originalPaths = original
     }
 }
-
 
 class ImportMedia {
     static func run(_ rootDirectory: String, _ importList: [DateAndFiles], _ logger: LogResults) {
@@ -33,7 +32,7 @@ class ImportMedia {
         // Move exported, setting the file date to the exif date
         // Move originals, renaming any .JPG or .JPEG as ({file}-org.{ext}) to avoid conflict with exported
         // Convert videos from originals
-        
+
         do {
             for daf in importList {
                 logger.log("Importing \(daf.date):\n")

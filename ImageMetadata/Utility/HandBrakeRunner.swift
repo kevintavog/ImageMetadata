@@ -2,24 +2,24 @@
 
 import RangicCore
 
-// Use the HandBrake command line - it uses ffmpeg and  is both easier to install and has a more stable CLI than ffmpeg
+// Use the HandBrake command line - it uses ffmpeg and is both easier to install and has a more stable CLI than ffmpeg
 open class HandBrakeRunner {
     static public func getRotationOption(_ rotation: Int?) -> String {
-        if let rot = rotation {
-            switch rot {
-            case 90:
-                return "--rotate=4"
-            case 180:
-                return "--rotate=3"
-            case 270:
-                return "--rotate=7"
-            case 0:
-                return ""
-            default:
-                Logger.warn("Unhandled rotation \(rot)")
-                return ""
-            }
-        }
+//        if let rot = rotation {
+//            switch rot {
+//            case 90:
+//                return "--rotate=angle=90:hflip=0"
+//            case 180:
+//                return "--rotate=angle=180:hflip=0"
+//            case 270:
+//                return "--rotate=angle=270:hflip=0"
+//            case 0:
+//                return "--rotate=angle=0:hflip=0"
+//            default:
+//                Logger.warn("Unhandled rotation \(rot)")
+//                return ""
+//            }
+//        }
         return ""
     }
 
